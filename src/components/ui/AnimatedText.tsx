@@ -3,25 +3,35 @@ import { useState, useEffect } from 'react';
 interface AnimatedTextProps {
   words: string[];
   className?: string;
+  onWordChange?: (word: string) => void;
 }
 
-export function AnimatedText({ words, className = "" }: AnimatedTextProps) {
+export function AnimatedText({ words, className = "", onWordChange }: AnimatedTextProps) {
   const [currentWordIndex, setCurrentWordIndex] = useState(0);
   const [isVisible, setIsVisible] = useState(true);
 
   useEffect(() => {
-    const interval = setInterval(() => {
+    const currentWord = words[currentWordIndex];
+    const vowelWords = ['engineer.', 'innovator.'];
+    const isVowelWord = vowelWords.includes(currentWord.toLowerCase());
+    
+    // Give vowel words extra time for the playful "n" animation
+    const displayTime = isVowelWord ? 4500 : 2500; // 4.5s for vowel words, 2.5s for others
+    
+    const timeout = setTimeout(() => {
       setIsVisible(false);
       
       setTimeout(() => {
-        setCurrentWordIndex((prev) => (prev + 1) % words.length);
+        const newIndex = (currentWordIndex + 1) % words.length;
+        setCurrentWordIndex(newIndex);
         setIsVisible(true);
+        onWordChange?.(words[newIndex]);
       }, 500); // Half second fade out, then change word and fade in
       
-    }, 3000); // Change word every 3 seconds
+    }, displayTime);
 
-    return () => clearInterval(interval);
-  }, [words.length]);
+    return () => clearTimeout(timeout);
+  }, [words.length, currentWordIndex, onWordChange, words]);
 
   const getColorClass = () => {
     const colors = [

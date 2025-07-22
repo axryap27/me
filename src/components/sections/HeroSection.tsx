@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { TiltCard } from '@/components/ui/TiltCard';
 import { AnimatedText } from '@/components/ui/AnimatedText';
 import { Button } from '@/components/ui/button';
@@ -6,11 +7,39 @@ import { ArrowDown, Github, Linkedin, Mail, ExternalLink } from 'lucide-react';
 
 export function HeroSection() {
   const { isLoaded, animationStage } = usePageAnimation();
+  const [currentWord, setCurrentWord] = useState('builder.');
+  const [showExtraLetter, setShowExtraLetter] = useState(false);
+  const [isExiting, setIsExiting] = useState(false);
   
   const scrollToNext = () => {
     const projectsSection = document.getElementById('projects');
     if (projectsSection) {
       projectsSection.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
+
+  const handleWordChange = (word: string) => {
+    setCurrentWord(word);
+    const vowelWords = ['engineer.', 'innovator.'];
+    const needsAn = vowelWords.includes(word.toLowerCase());
+    
+    // If currently showing "n" and switching to non-vowel word, animate out
+    if (showExtraLetter && !needsAn) {
+      setIsExiting(true);
+      setTimeout(() => {
+        setShowExtraLetter(false);
+        setIsExiting(false);
+      }, 300); // Slightly earlier fade out
+    } else if (needsAn) {
+      // First show the word without "n", then playfully add it after 1 second
+      setShowExtraLetter(false);
+      setIsExiting(false);
+      setTimeout(() => {
+        setShowExtraLetter(true);
+      }, 1000); // 1 second delay for playful effect
+    } else {
+      setShowExtraLetter(false);
+      setIsExiting(false);
     }
   };
 
@@ -91,14 +120,34 @@ export function HeroSection() {
               ? 'opacity-100 translate-y-0' 
               : 'opacity-0 translate-y-8'
           }`}>
-            <span className="text-gray-400">I'm an</span>
+            <span className="text-gray-400">I'm a</span>
+            <span 
+              className={`text-gray-400 ${
+                !showExtraLetter && !isExiting
+                  ? 'opacity-0 -translate-y-4 scale-75' 
+                  : ''
+              }`}
+              style={{ 
+                display: 'inline-block',
+                transformOrigin: 'center bottom',
+                animation: isExiting 
+                  ? 'custom-exit 0.4s ease-in forwards'
+                  : showExtraLetter 
+                  ? 'custom-bounce 1.2s ease-out'
+                  : 'none'
+              }}
+            >
+              {(showExtraLetter || isExiting) ? 'n' : ''}
+            </span>
+            <span className="text-gray-400"> </span>
             <AnimatedText 
               words={[
-                'engineer.',
-                'innovator.', 
-                'code.'
+                'builder.',
+                'coder.',
+                'engineer.', 
               ]}
               className="font-semibold"
+              onWordChange={handleWordChange}
             />
           </div>
           
@@ -118,16 +167,15 @@ export function HeroSection() {
               ? 'opacity-100 translate-y-0' 
               : 'opacity-0 translate-y-8'
           }`}>
-            <Button 
-              size="lg" 
-              className="bg-white text-black hover:bg-gray-200 font-medium px-8 py-4"
-              asChild
-            >
-              <a href="mailto:aarya27@gmail.com">
+            <a href="mailto:aarya27@gmail.com" className="inline-block">
+              <Button 
+                size="lg" 
+                className="bg-white text-black hover:bg-gray-200 font-medium px-8 py-4"
+              >
                 Get In Touch
                 <ExternalLink className="ml-2 h-4 w-4" />
-              </a>
-            </Button>
+              </Button>
+            </a>
             
             <Button 
               variant="outline" 

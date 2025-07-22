@@ -2,6 +2,45 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Custom bounce animation for the "n" letter */
+@keyframes custom-bounce {
+  0% {
+    transform: translateY(-12px) scale(0.9);
+    opacity: 0;
+  }
+  35% {
+    transform: translateY(0px) scale(1);
+    opacity: 1;
+  }
+  50% {
+    transform: translateY(-4px) scale(1);
+  }
+  70% {
+    transform: translateY(0px) scale(1);
+  }
+  85% {
+    transform: translateY(-1px) scale(1);
+  }
+  100% {
+    transform: translateY(0px) scale(1);
+  }
+}
+
+/* Exit animation for the "n" letter */
+@keyframes custom-exit {
+  0% {
+    transform: translateY(0px) scale(1);
+    opacity: 1;
+  }
+  70% {
+    opacity: 0.2;
+  }
+  100% {
+    transform: translateY(-8px) scale(0.8);
+    opacity: 0;
+  }
+}
+
 /* Definition of the design system. All colors, gradients, fonts, etc should be defined here. 
 All colors MUST be HSL.
 */

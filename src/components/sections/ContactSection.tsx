@@ -29,15 +29,14 @@ export function ContactSection() {
               <p className="text-gray-400 mb-6 text-center">Reach out via email or connect on LinkedIn</p>
               
               <div className="flex gap-3">
-                <Button 
-                  className="flex-1 bg-white text-black hover:bg-gray-200"
-                  asChild
-                >
-                  <a href="mailto:aarya27@gmail.com">
+                <a href="mailto:aarya27@gmail.com" className="flex-1">
+                  <Button 
+                    className="w-full bg-white text-black hover:bg-gray-200"
+                  >
                     <Mail className="h-4 w-4 mr-2" />
                     Email
-                  </a>
-                </Button>
+                  </Button>
+                </a>
                 <Button 
                   variant="outline"
                   className="flex-1 border-gray-600 text-white hover:bg-white hover:text-black"

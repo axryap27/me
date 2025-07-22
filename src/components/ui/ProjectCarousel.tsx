@@ -18,37 +18,17 @@ interface ProjectCarouselProps {
 
 export function ProjectCarousel({ projects }: ProjectCarouselProps) {
   const [currentIndex, setCurrentIndex] = useState(0);
-  const [isAutoPlaying, setIsAutoPlaying] = useState(true);
-
-  // Auto-play functionality
-  useEffect(() => {
-    if (!isAutoPlaying) return;
-    
-    const interval = setInterval(() => {
-      setCurrentIndex((prevIndex) => 
-        prevIndex === projects.length - 1 ? 0 : prevIndex + 1
-      );
-    }, 5000); // Change slide every 5 seconds
-
-    return () => clearInterval(interval);
-  }, [isAutoPlaying, projects.length]);
 
   const goToPrevious = () => {
-    setIsAutoPlaying(false);
     setCurrentIndex(currentIndex === 0 ? projects.length - 1 : currentIndex - 1);
-    setTimeout(() => setIsAutoPlaying(true), 10000); // Resume auto-play after 10s
   };
 
   const goToNext = () => {
-    setIsAutoPlaying(false);
     setCurrentIndex(currentIndex === projects.length - 1 ? 0 : currentIndex + 1);
-    setTimeout(() => setIsAutoPlaying(true), 10000); // Resume auto-play after 10s
   };
 
   const goToSlide = (index: number) => {
-    setIsAutoPlaying(false);
     setCurrentIndex(index);
-    setTimeout(() => setIsAutoPlaying(true), 10000); // Resume auto-play after 10s
   };
 
   if (projects.length === 0) return null;
