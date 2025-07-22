@@ -157,8 +157,8 @@ export function HeroSection() {
               ? 'opacity-100 translate-y-0' 
               : 'opacity-0 translate-y-8'
           }`}>
-            Passionate about building innovative software solutions and exploring the intersection 
-            of mathematics and technology. Currently pursuing a double major in Computer Engineering and Mathematics.
+            Hi I'm Aarya! I'm a student at Northwestern studying Computer Engineering and Math.  
+            Currently seeking 2026 internships in software engineering, cybersecurity, and trading.
           </p>
 
           {/* Buttons */}

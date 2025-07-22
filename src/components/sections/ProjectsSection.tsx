@@ -19,7 +19,7 @@ export function ProjectsSection() {
       githubUrl: "https://github.com/axryap27/python-debugger",
     },
     {
-      title: "Apollo File Manager",
+      title: "File Manager System",
       description: "AI-powered file management system for small businesses with intelligent organization and automated workflow optimization.",
       tech: ["TypeScript", "React", "Node.js", "AI", "N8N"],
       category: "Agents and backend systems",
@@ -44,11 +44,11 @@ export function ProjectsSection() {
           {/* Header */}
           <div className="mb-20">
             <h2 className="text-4xl lg:text-6xl font-bold mb-6">
-              SELECTED WORK
+              SELECTED PROJECTS
             </h2>
             <p className="text-xl text-gray-400 max-w-3xl">
-              A collection of projects exploring full-stack development, my personal interest,
-              and creative solutions to problems that matter to me.
+              Exploring full-stack development, my personal interests,
+              and creative solutions to problems that matter to me!
             </p>
           </div>
 
