@@ -5,6 +5,8 @@ import { usePageAnimation } from '@/hooks/usePageAnimation';
 import { ArrowDown, Github, Linkedin, Mail, ExternalLink } from 'lucide-react';
 
 export function HeroSection() {
+  const { isLoaded, animationStage } = usePageAnimation();
+  
   const scrollToNext = () => {
     const projectsSection = document.getElementById('projects');
     if (projectsSection) {
