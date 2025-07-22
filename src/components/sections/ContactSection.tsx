@@ -1,142 +1,91 @@
-import { Card, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
-import { Input } from '@/components/ui/input';
-import { Textarea } from '@/components/ui/textarea';
-import { Mail, Phone, MapPin, Send } from 'lucide-react';
+import { Mail, Github, Linkedin, ExternalLink } from 'lucide-react';
 
 export function ContactSection() {
-  const contactInfo = [
-    {
-      icon: <Mail className="h-6 w-6" />,
-      title: "Email",
-      value: "alex.chen@email.com",
-      link: "mailto:alex.chen@email.com"
-    },
-    {
-      icon: <Phone className="h-6 w-6" />,
-      title: "Phone",
-      value: "+1 (555) 123-4567",
-      link: "tel:+15551234567"
-    },
-    {
-      icon: <MapPin className="h-6 w-6" />,
-      title: "Location",
-      value: "San Francisco, CA",
-      link: "#"
-    }
-  ];
-
   return (
-    <section id="contact" className="py-24 relative">
-      <div className="container mx-auto px-6">
-        <div className="max-w-6xl mx-auto">
-          <div className="text-center mb-16">
-            <h2 className="text-4xl md:text-6xl font-bold mb-6 text-gradient-primary">
-              Let's Work Together
+    <section id="contact" className="py-24 bg-black text-white">
+      <div className="container mx-auto px-8">
+        <div className="max-w-4xl mx-auto text-center">
+          
+          {/* Header */}
+          <div className="mb-16">
+            <h2 className="text-4xl lg:text-6xl font-bold mb-6">
+              LET'S CONNECT
             </h2>
-            <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
-              Ready to bring your ideas to life? I'm always excited to discuss new opportunities 
-              and collaborate on innovative projects.
+            <p className="text-xl text-gray-400 max-w-2xl mx-auto leading-relaxed">
+              Always interested in new opportunities and collaborations. 
+              Feel free to reach out, always willing to chat!
             </p>
           </div>
 
-          <div className="grid lg:grid-cols-2 gap-12">
-            {/* Contact Form */}
-            <Card className="glass">
-              <CardContent className="p-8">
-                <h3 className="text-2xl font-semibold mb-6 text-secondary">Send a Message</h3>
-                <form className="space-y-6">
-                  <div className="grid md:grid-cols-2 gap-4">
-                    <div>
-                      <label className="block text-sm font-medium mb-2">First Name</label>
-                      <Input placeholder="John" className="bg-background/50" />
-                    </div>
-                    <div>
-                      <label className="block text-sm font-medium mb-2">Last Name</label>
-                      <Input placeholder="Doe" className="bg-background/50" />
-                    </div>
-                  </div>
-                  
-                  <div>
-                    <label className="block text-sm font-medium mb-2">Email</label>
-                    <Input type="email" placeholder="john@example.com" className="bg-background/50" />
-                  </div>
-                  
-                  <div>
-                    <label className="block text-sm font-medium mb-2">Subject</label>
-                    <Input placeholder="Project Discussion" className="bg-background/50" />
-                  </div>
-                  
-                  <div>
-                    <label className="block text-sm font-medium mb-2">Message</label>
-                    <Textarea 
-                      placeholder="Tell me about your project..." 
-                      rows={6}
-                      className="bg-background/50"
-                    />
-                  </div>
-
-                  <Button className="w-full gradient-primary text-primary-foreground glow-primary">
-                    <Send className="h-4 w-4 mr-2" />
-                    Send Message
-                  </Button>
-                </form>
-              </CardContent>
-            </Card>
-
-            {/* Contact Info */}
-            <div className="space-y-8">
-              <div>
-                <h3 className="text-2xl font-semibold mb-6 text-secondary">Get In Touch</h3>
-                <p className="text-muted-foreground mb-8">
-                  Whether you have a project in mind, want to collaborate, or just want to say hello, 
-                  I'd love to hear from you. Let's create something amazing together!
-                </p>
+          {/* Contact Method */}
+          <div className="max-w-md mx-auto mb-16">
+            <div className="p-8 bg-gray-900/50 rounded-2xl border border-gray-800 hover:border-gray-700 transition-colors">
+              <div className="flex justify-center gap-4 mb-4">
+                <Mail className="h-8 w-8 text-white" />
+                <Linkedin className="h-8 w-8 text-white" />
               </div>
-
-              <div className="space-y-6">
-                {contactInfo.map((info, index) => (
-                  <Card key={index} className="glass hover:glow-primary transition-smooth cursor-pointer">
-                    <CardContent className="p-6">
-                      <div className="flex items-center space-x-4">
-                        <div className="text-primary">{info.icon}</div>
-                        <div>
-                          <div className="font-medium">{info.title}</div>
-                          <div className="text-muted-foreground">{info.value}</div>
-                        </div>
-                      </div>
-                    </CardContent>
-                  </Card>
-                ))}
-              </div>
-
-              <div className="pt-8">
-                <h4 className="text-lg font-semibold mb-4 text-secondary">Why Work With Me?</h4>
-                <ul className="space-y-3 text-muted-foreground">
-                  <li className="flex items-start">
-                    <span className="text-primary mr-2">✓</span>
-                    5+ years of proven development experience
-                  </li>
-                  <li className="flex items-start">
-                    <span className="text-primary mr-2">✓</span>
-                    Expertise in modern web technologies
-                  </li>
-                  <li className="flex items-start">
-                    <span className="text-primary mr-2">✓</span>
-                    Strong focus on user experience and performance
-                  </li>
-                  <li className="flex items-start">
-                    <span className="text-primary mr-2">✓</span>
-                    Clear communication and project management
-                  </li>
-                  <li className="flex items-start">
-                    <span className="text-primary mr-2">✓</span>
-                    Commitment to delivering high-quality solutions
-                  </li>
-                </ul>
+              <h3 className="text-xl font-bold mb-2 text-center">Get In Touch</h3>
+              <p className="text-gray-400 mb-6 text-center">Reach out via email or connect on LinkedIn</p>
+              
+              <div className="flex gap-3">
+                <Button 
+                  className="flex-1 bg-white text-black hover:bg-gray-200"
+                  onClick={() => window.location.href = 'mailto:aarya27@gmail.com'}
+                >
+                  <Mail className="h-4 w-4 mr-2" />
+                  Email
+                </Button>
+                <Button 
+                  variant="outline"
+                  className="flex-1 border-gray-600 text-white hover:bg-white hover:text-black"
+                  onClick={() => window.open('https://linkedin.com/in/aarya-p9')}
+                >
+                  <Linkedin className="h-4 w-4 mr-2" />
+                  LinkedIn
+                </Button>
               </div>
             </div>
           </div>
+
+          {/* Social Links */}
+          <div className="mb-16">
+            <h3 className="text-xl font-bold mb-8 text-gray-300">Find me online</h3>
+            <div className="flex justify-center gap-6">
+              <Button 
+                size="lg"
+                variant="ghost" 
+                className="p-4 rounded-full border border-gray-700 hover:bg-white hover:text-black transition-colors"
+                onClick={() => window.open('https://github.com/axryap27')}
+              >
+                <Github className="h-6 w-6" />
+              </Button>
+              
+              <Button 
+                size="lg"
+                variant="ghost" 
+                className="p-4 rounded-full border border-gray-700 hover:bg-white hover:text-black transition-colors"
+                onClick={() => window.open('https://linkedin.com/in/aarya-p9')}
+              >
+                <Linkedin className="h-6 w-6" />
+              </Button>
+              
+              <Button 
+                size="lg"
+                variant="ghost" 
+                className="p-4 rounded-full border border-gray-700 hover:bg-white hover:text-black transition-colors"
+                onClick={() => window.location.href = 'mailto:aarya27@gmail.com'}
+              >
+                <Mail className="h-6 w-6" />
+              </Button>
+            </div>
+          </div>
+
+          {/* Footer Note */}
+          <div className="text-gray-500 text-sm">
+            <p>Currently open to new opportunities worldwide</p>
+          </div>
+
         </div>
       </div>
     </section>

@@ -37,7 +37,6 @@ export function SkillsSection() {
     <section id="skills" className="py-24 relative overflow-hidden">
       {/* 3D Background */}
       <div className="absolute inset-0 opacity-30">
-        <Scene3D showSkills={true} />
       </div>
       
       <div className="relative z-10 container mx-auto px-6">

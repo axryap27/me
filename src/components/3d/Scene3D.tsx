@@ -1,42 +1,20 @@
 import { Canvas } from '@react-three/fiber';
-import { OrbitControls, Stars } from '@react-three/drei';
-import { FloatingCubes } from './FloatingCubes';
-import { SkillOrbs } from './SkillOrbs';
+import { AstronomyBackground } from './AstronomyBackground';
 
-interface Scene3DProps {
-  showSkills?: boolean;
-}
-
-export function Scene3D({ showSkills = false }: Scene3DProps) {
+export function Scene3D() {
   return (
     <Canvas
-      camera={{ position: [0, 0, 8], fov: 75 }}
+      camera={{ position: [0, 0, 20], fov: 45 }}
       style={{ height: '100%', width: '100%' }}
+      gl={{ antialias: true, alpha: true }}
     >
-      <ambientLight intensity={0.3} />
-      <pointLight position={[10, 10, 10]} intensity={1} color="#00BFFF" />
-      <pointLight position={[-10, -10, -10]} intensity={0.5} color="#FF00FF" />
+      {/* Very subtle space fog */}
+      <fog attach="fog" args={['#000000', 50, 120]} />
       
-      <Stars 
-        radius={300} 
-        depth={60} 
-        count={1000} 
-        factor={7} 
-        saturation={0} 
-        fade 
-        speed={0.5}
-      />
+      {/* Minimal lighting */}
+      <ambientLight intensity={0.05} />
       
-      {showSkills ? <SkillOrbs /> : <FloatingCubes />}
-      
-      <OrbitControls 
-        enableZoom={false} 
-        enablePan={false}
-        autoRotate
-        autoRotateSpeed={0.5}
-        maxPolarAngle={Math.PI / 2}
-        minPolarAngle={Math.PI / 2}
-      />
+      <AstronomyBackground />
     </Canvas>
   );
 }

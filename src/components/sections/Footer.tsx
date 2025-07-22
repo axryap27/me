@@ -13,7 +13,6 @@ export function Footer() {
 
   const quickLinks = [
     { name: "About", href: "#about" },
-    { name: "Skills", href: "#skills" },
     { name: "Projects", href: "#projects" },
     { name: "Contact", href: "#contact" },
   ];
@@ -25,7 +24,7 @@ export function Footer() {
           {/* Brand */}
           <div>
             <div className="text-2xl font-bold text-gradient-primary mb-4">
-              Alex Chen
+              Aarya Patel
             </div>
             <p className="text-muted-foreground mb-4">
               Full-Stack Software Engineer passionate about creating innovative digital experiences.
@@ -66,9 +65,8 @@ export function Footer() {
           <div>
             <h3 className="text-lg font-semibold mb-4 text-secondary">Contact</h3>
             <div className="space-y-2 text-muted-foreground">
-              <p>alex.chen@email.com</p>
-              <p>+1 (555) 123-4567</p>
-              <p>San Francisco, CA</p>
+              <p>aarya27@email.com</p>
+              <p>New York, NY</p>
             </div>
           </div>
         </div>
@@ -77,7 +75,7 @@ export function Footer() {
         <div className="border-t border-border/50 pt-8">
           <div className="flex flex-col md:flex-row justify-between items-center">
             <p className="text-muted-foreground text-sm">
-              © {currentYear} Alex Chen. All rights reserved.
+              © {currentYear} Aarya Patel. All rights reserved.
             </p>
             <div className="flex space-x-6 mt-4 md:mt-0">
               <a href="#" className="text-muted-foreground hover:text-primary text-sm transition-smooth">
