@@ -1,12 +1,42 @@
-// Update this page (the content is just a fallback if you fail to update the page)
+import { useState, useEffect } from 'react';
+import { Navigation } from '@/components/Navigation';
+import { HeroSection } from '@/components/sections/HeroSection';
+import { AboutSection } from '@/components/sections/AboutSection';
+import { SkillsSection } from '@/components/sections/SkillsSection';
+import { ProjectsSection } from '@/components/sections/ProjectsSection';
+import { ContactSection } from '@/components/sections/ContactSection';
+import { Footer } from '@/components/sections/Footer';
 
 const Index = () => {
+  const [activeSection, setActiveSection] = useState('hero');
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const sections = ['hero', 'about', 'skills', 'projects', 'contact'];
+      const scrollPosition = window.scrollY + 100;
+
+      for (let i = sections.length - 1; i >= 0; i--) {
+        const section = document.getElementById(sections[i]);
+        if (section && section.offsetTop <= scrollPosition) {
+          setActiveSection(sections[i]);
+          break;
+        }
+      }
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
   return (
-    <div className="min-h-screen flex items-center justify-center bg-background">
-      <div className="text-center">
-        <h1 className="text-4xl font-bold mb-4">Welcome to Your Blank App</h1>
-        <p className="text-xl text-muted-foreground">Start building your amazing project here!</p>
-      </div>
+    <div className="min-h-screen bg-background">
+      <Navigation activeSection={activeSection} onSectionChange={setActiveSection} />
+      <HeroSection />
+      <AboutSection />
+      <SkillsSection />
+      <ProjectsSection />
+      <ContactSection />
+      <Footer />
     </div>
   );
 };
