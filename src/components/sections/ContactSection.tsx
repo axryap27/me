@@ -31,10 +31,12 @@ export function ContactSection() {
               <div className="flex gap-3">
                 <Button 
                   className="flex-1 bg-white text-black hover:bg-gray-200"
-                  onClick={() => window.location.href = 'mailto:aarya27@gmail.com'}
+                  asChild
                 >
-                  <Mail className="h-4 w-4 mr-2" />
-                  Email
+                  <a href="mailto:aarya27@gmail.com">
+                    <Mail className="h-4 w-4 mr-2" />
+                    Email
+                  </a>
                 </Button>
                 <Button 
                   variant="outline"
@@ -74,9 +76,11 @@ export function ContactSection() {
                 size="lg"
                 variant="ghost" 
                 className="p-4 rounded-full border border-gray-700 hover:bg-white hover:text-black transition-colors"
-                onClick={() => window.location.href = 'mailto:aarya27@gmail.com'}
+                asChild
               >
-                <Mail className="h-6 w-6" />
+                <a href="mailto:aarya27@gmail.com">
+                  <Mail className="h-6 w-6" />
+                </a>
               </Button>
             </div>
           </div>

@@ -60,9 +60,11 @@ export function HeroSection() {
                     size="sm" 
                     variant="ghost" 
                     className="p-2 h-8 w-8 hover:bg-white/10"
-                    onClick={() => window.location.href = 'mailto:aarya27@gmail.com'}
+                    asChild
                   >
-                    <Mail className="h-4 w-4" />
+                    <a href="mailto:aarya27@gmail.com">
+                      <Mail className="h-4 w-4" />
+                    </a>
                   </Button>
                 </div>
               </div>
@@ -89,10 +91,12 @@ export function HeroSection() {
             <Button 
               size="lg" 
               className="bg-white text-black hover:bg-gray-200 font-medium px-8 py-4"
-              onClick={() => window.location.href = 'mailto:aarya27@gmail.com'}
+              asChild
             >
-              Get In Touch
-              <ExternalLink className="ml-2 h-4 w-4" />
+              <a href="mailto:aarya27@gmail.com">
+                Get In Touch
+                <ExternalLink className="ml-2 h-4 w-4" />
+              </a>
             </Button>
             
             <Button 
