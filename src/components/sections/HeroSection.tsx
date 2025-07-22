@@ -1,6 +1,7 @@
 import { TiltCard } from '@/components/ui/TiltCard';
 import { AnimatedText } from '@/components/ui/AnimatedText';
 import { Button } from '@/components/ui/button';
+import { usePageAnimation } from '@/hooks/usePageAnimation';
 import { ArrowDown, Github, Linkedin, Mail, ExternalLink } from 'lucide-react';
 
 export function HeroSection() {
@@ -76,20 +77,20 @@ export function HeroSection() {
         {/* Right Side - Main Content */}
         <div className="flex-1 text-center lg:text-left max-w-2xl">
           <h1 className="text-5xl lg:text-7xl font-bold mb-6 text-white leading-tight">
-            Aarya Patel
+            {/* Aarya Patel */}
           </h1>
           
           <h2 className="text-xl lg:text-2xl mb-4 font-light">
             {/* <span className="text-gray-300">CompE & Math @ Northwestern</span> */}
           </h2>
           
-          <div className="text-xl lg:text-2xl mb-8 font-large">
-            <span className="text-gray-400">I'm a </span>
+          <div className="text-3xl lg:text-4xl mb-8 font-semibold">
+            <span className="text-gray-400">I </span>
             <AnimatedText 
               words={[
-                'problem-solver.',
-                'builder.', 
-                'innovator.'
+                'build.',
+                'engineer.', 
+                'code.'
               ]}
               className="font-semibold"
             />
