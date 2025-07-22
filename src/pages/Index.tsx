@@ -3,7 +3,6 @@ import { Navigation } from '@/components/Navigation';
 import { HeroSection } from '@/components/sections/HeroSection';
 import { ProjectsSection } from '@/components/sections/ProjectsSection';
 import { ContactSection } from '@/components/sections/ContactSection';
-import { Footer } from '@/components/sections/Footer';
 import { Scene3D } from '@/components/3d/Scene3D';
 
 const Index = () => {
@@ -40,7 +39,6 @@ const Index = () => {
         <HeroSection />
         <ProjectsSection />
         <ContactSection />
-        <Footer />
       </div>
     </div>
   );

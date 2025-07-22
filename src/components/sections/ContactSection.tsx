@@ -50,44 +50,10 @@ export function ContactSection() {
             </div>
           </div>
 
-          {/* Social Links */}
-          <div className="mb-16">
-            <h3 className="text-xl font-bold mb-8 text-gray-300">Find me online</h3>
-            <div className="flex justify-center gap-6">
-              <Button 
-                size="lg"
-                variant="ghost" 
-                className="p-4 rounded-full border border-gray-700 hover:bg-white hover:text-black transition-colors"
-                onClick={() => window.open('https://github.com/axryap27')}
-              >
-                <Github className="h-6 w-6" />
-              </Button>
-              
-              <Button 
-                size="lg"
-                variant="ghost" 
-                className="p-4 rounded-full border border-gray-700 hover:bg-white hover:text-black transition-colors"
-                onClick={() => window.open('https://linkedin.com/in/aarya-p9')}
-              >
-                <Linkedin className="h-6 w-6" />
-              </Button>
-              
-              <Button 
-                size="lg"
-                variant="ghost" 
-                className="p-4 rounded-full border border-gray-700 hover:bg-white hover:text-black transition-colors"
-                asChild
-              >
-                <a href="mailto:aarya27@gmail.com">
-                  <Mail className="h-6 w-6" />
-                </a>
-              </Button>
-            </div>
-          </div>
 
           {/* Footer Note */}
           <div className="text-gray-500 text-sm">
-            <p>Currently open to new opportunities worldwide</p>
+            <p>Open to new opportunities worldwide</p>
           </div>
 
         </div>

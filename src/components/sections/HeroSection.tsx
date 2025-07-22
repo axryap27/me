@@ -1,4 +1,5 @@
 import { TiltCard } from '@/components/ui/TiltCard';
+import { AnimatedText } from '@/components/ui/AnimatedText';
 import { Button } from '@/components/ui/button';
 import { ArrowDown, Github, Linkedin, Mail, ExternalLink } from 'lucide-react';
 
@@ -19,7 +20,7 @@ export function HeroSection() {
         {/* Left Side - Profile Card */}
         <div className="flex-shrink-0">
           <TiltCard 
-            className="w-80 h-96"
+            className="w-96 h-[28rem]"
             intensity={12}
             scale={1.05}
             perspective={1200}
@@ -37,8 +38,8 @@ export function HeroSection() {
               
               {/* Card Content */}
               <div className="absolute bottom-6 left-6 right-6 text-white">
-                <h3 className="text-xl font-bold mb-1">Aarya Patel</h3>
-                <p className="text-gray-300 text-sm mb-3">CompE & Math @ Northwestern</p>
+                <h3 className="text-2xl font-bold mb-2 font-sans">Aarya Patel</h3>
+                <p className="text-gray-300 text-base mb-4 font-light">CompE & Math @ Northwestern</p>
                 <div className="flex gap-2">
                   <Button 
                     size="sm" 
@@ -78,9 +79,21 @@ export function HeroSection() {
             Aarya Patel
           </h1>
           
-          <h2 className="text-xl lg:text-2xl text-gray-300 mb-8 font-light">
-            CompE & Math @ Northwestern
+          <h2 className="text-xl lg:text-2xl mb-4 font-light">
+            {/* <span className="text-gray-300">CompE & Math @ Northwestern</span> */}
           </h2>
+          
+          <div className="text-xl lg:text-2xl mb-8 font-large">
+            <span className="text-gray-400">I'm a </span>
+            <AnimatedText 
+              words={[
+                'problem-solver.',
+                'builder.', 
+                'innovator.'
+              ]}
+              className="font-semibold"
+            />
+          </div>
           
           <p className="text-gray-400 text-lg leading-relaxed mb-12 max-w-xl">
             Passionate about building innovative software solutions and exploring the intersection 

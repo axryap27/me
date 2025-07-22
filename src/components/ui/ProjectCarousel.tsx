@@ -80,11 +80,27 @@ export function ProjectCarousel({ projects }: ProjectCarouselProps) {
             scale={1.02}
           >
             <div className="relative w-full h-full bg-gradient-to-br from-gray-900 to-gray-800 rounded-2xl border border-gray-700 overflow-hidden">
-              {/* Project visual placeholder */}
-              <div className="absolute inset-4 bg-gradient-to-br from-blue-600/20 to-purple-600/20 rounded-xl flex items-center justify-center">
-                <div className="text-6xl text-white/50">
-                  {currentIndex === 0 ? '📱' : currentIndex === 1 ? '🔧' : currentIndex === 2 ? '🤖' : '⚡'}
-                </div>
+              {/* Project Image */}
+              <div className="absolute inset-4 rounded-xl overflow-hidden">
+                {currentIndex === 2 ? (
+                  <img 
+                    src="/images/apollo-file-management.jpg" 
+                    alt={currentProject.title}
+                    className="w-full h-full object-cover"
+                  />
+                ) : currentIndex === 3 ? (
+                  <img 
+                    src="/images/mini-ethereum.png" 
+                    alt={currentProject.title}
+                    className="w-full h-full object-cover"
+                  />
+                ) : (
+                  <div className="bg-gradient-to-br from-blue-600/20 to-purple-600/20 w-full h-full flex items-center justify-center">
+                    <div className="text-6xl text-white/50">
+                      {currentIndex === 0 ? '📱' : '🔧'}
+                    </div>
+                  </div>
+                )}
               </div>
               
               {/* Overlay */}
@@ -95,10 +111,22 @@ export function ProjectCarousel({ projects }: ProjectCarouselProps) {
                 <div className="text-sm text-gray-400 mb-2">{currentProject.category}</div>
                 <h3 className="text-xl font-bold text-white mb-2">{currentProject.title}</h3>
                 <div className="flex gap-2">
-                  <Button size="sm" variant="ghost" className="p-2 h-8 w-8 hover:bg-white/10">
+                  <Button 
+                    size="sm" 
+                    variant="ghost" 
+                    className="p-2 h-8 w-8 hover:bg-white/10"
+                    onClick={() => window.open(currentProject.githubUrl, '_blank')}
+                    disabled={currentProject.githubUrl === '#'}
+                  >
                     <Github className="h-4 w-4" />
                   </Button>
-                  <Button size="sm" variant="ghost" className="p-2 h-8 w-8 hover:bg-white/10">
+                  <Button 
+                    size="sm" 
+                    variant="ghost" 
+                    className="p-2 h-8 w-8 hover:bg-white/10"
+                    onClick={() => window.open(currentProject.githubUrl, '_blank')}
+                    disabled={currentProject.githubUrl === '#'}
+                  >
                     <ExternalLink className="h-4 w-4" />
                   </Button>
                 </div>

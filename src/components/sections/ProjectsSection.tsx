@@ -3,36 +3,36 @@ import { ProjectCarousel } from "@/components/ui/ProjectCarousel";
 export function ProjectsSection() {
   const projects = [
     {
-      title: "Atlas: Fitness tracking made fun",
-      description: "Full-stack cross-platform mobile application designed to gamify fitness tracking and progression.",
+      title: "Atlas",
+      description: "Full-stack cross-platform mobile application designed for socializing fitness tracking & progression.",
       tech: ["React Native", "Node.js", "Javascript", "PostgreSQL", "REST APIs"],
       category: "Mobile Development",
-      year: "2025",
-      githubUrl: "#",
+      year: "Currently Building",
+      githubUrl: "https://github.com/axryap27/atlas",
     },
     {
       title: "Python Debugger Engine",
-      description: "High-performance debugging tool built in C++ for Python programs, featuring advanced breakpoint management and memory analysis.",
+      description: "CLI Debugging tool built in C++ for NU Python programs, featuring a symbolic RAM system.",
       tech: ["C++", "C", "Python", "Data Structures"],
-      category: "Fundamentals",
+      category: "Introductory systems programming",
       year: "2025",
-      githubUrl: "#",
+      githubUrl: "https://github.com/axryap27/python-debugger",
     },
     {
       title: "Apollo File Manager",
       description: "AI-powered file management system for small businesses with intelligent organization and automated workflow optimization.",
-      tech: ["TypeScript", "React", "Node.js", "AI", "Python"],
+      tech: ["TypeScript", "React", "Node.js", "AI", "N8N"],
       category: "Agents and backend systems",
-      year: "2025",
-      githubUrl: "#",
+      year: "Currently building",
+      githubUrl: "https://github.com/axryap27/apollo",
     },
     {
       title: "Mini-Ethereum",
-      description: "Scalable real-time messaging platform with end-to-end encryption and microservices architecture.",
+      description: "Python-based mini-Ethereum with PoW blockchain, ECDSA wallets, and CLI for mining and transactions.",
       tech: ["Python", "Cryptography", "Blockchain"],
       category: "Backend Systems",
-      year: "2023",
-      githubUrl: "#",
+      year: "2024-2025",
+      githubUrl: "https://github.com/axryap27/mini-ethereum",
     },
   ];
 
@@ -47,8 +47,8 @@ export function ProjectsSection() {
               SELECTED WORK
             </h2>
             <p className="text-xl text-gray-400 max-w-3xl">
-              A collection of projects showcasing my expertise in full-stack development, 
-              systems programming, and innovative problem-solving.
+              A collection of projects exploring full-stack development, my personal interest,
+              and creative solutions to problems that matter to me.
             </p>
           </div>
 
