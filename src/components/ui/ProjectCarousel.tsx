@@ -62,7 +62,15 @@ export function ProjectCarousel({ projects }: ProjectCarouselProps) {
             <div className="relative w-full h-full bg-gradient-to-br from-gray-900 to-gray-800 rounded-2xl border border-gray-700 overflow-hidden">
               {/* Project Image */}
               <div className="absolute inset-4 rounded-xl overflow-hidden">
-                {currentIndex === 2 ? (
+                {
+                  currentIndex === 0 ? (
+                    <img 
+                      src="/images/atlas.png" 
+                      alt={currentProject.title}
+                      className="w-full h-full object-cover"
+                    />
+                  ) :
+                  currentIndex === 2 ? (
                   <img 
                     src="/images/apollo-file-management.jpg" 
                     alt={currentProject.title}
