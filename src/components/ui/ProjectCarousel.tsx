@@ -2,7 +2,6 @@ import { useState, useEffect } from 'react';
 import { TiltCard } from '@/components/ui/TiltCard';
 import { Button } from '@/components/ui/button';
 import { ChevronLeft, ChevronRight, Github, ExternalLink } from 'lucide-react';
-import iPhone3D from '@/components/3d/iPhone3D';
 
 interface Project {
   title: string;
@@ -54,102 +53,75 @@ export function ProjectCarousel({ projects }: ProjectCarouselProps) {
 
         {/* Project Card */}
         <div className="flex-1 flex justify-center">
-          {currentIndex === 0 ? (
-            // 3D iPhone for Atlas project
-            <div className="w-full max-w-md h-96 relative">
-              <iPhone3D 
-                atlasImage="/images/altas.png"
-                className="w-full h-full"
-              />
-              {/* Project info overlay */}
-              <div className="absolute bottom-6 left-6 right-6 z-10">
-                <div className="bg-black/80 backdrop-blur-sm rounded-xl p-4 border border-gray-700">
-                  <div className="text-sm text-gray-400 mb-2">{currentProject.category}</div>
-                  <h3 className="text-xl font-bold text-white mb-2">{currentProject.title}</h3>
-                  <div className="flex gap-2">
-                    <Button 
-                      size="sm" 
-                      variant="ghost" 
-                      className="p-2 h-8 w-8 hover:bg-white/10"
-                      onClick={() => window.open(currentProject.githubUrl, '_blank')}
-                      disabled={currentProject.githubUrl === '#'}
-                    >
-                      <Github className="h-4 w-4" />
-                    </Button>
-                    <Button 
-                      size="sm" 
-                      variant="ghost" 
-                      className="p-2 h-8 w-8 hover:bg-white/10"
-                      onClick={() => window.open(currentProject.githubUrl, '_blank')}
-                      disabled={currentProject.githubUrl === '#'}
-                    >
-                      <ExternalLink className="h-4 w-4" />
-                    </Button>
+          <TiltCard 
+            key={currentIndex} // Force re-mount for animation
+            className={currentIndex === 0 ? "w-80 h-[600px]" : "w-full max-w-md h-96"}
+            intensity={8}
+            scale={1.02}
+          >
+            <div className={`relative w-full h-full bg-gradient-to-br from-gray-900 to-gray-800 rounded-2xl border border-gray-700 overflow-hidden ${
+              currentIndex === 0 ? 'shadow-2xl shadow-black/60 before:absolute before:top-1 before:left-1 before:w-full before:h-full before:bg-gradient-to-br before:from-gray-800 before:to-gray-700 before:rounded-2xl before:-z-10 before:transform before:translate-x-1 before:translate-y-1' : ''
+            }`}>
+              {/* Project Image */}
+              <div className="absolute inset-2 rounded-xl overflow-hidden">
+                {
+                  currentIndex === 0 ? (
+                    <img 
+                      src="/images/altas.png" 
+                      alt={currentProject.title}
+                      className="w-full h-full object-cover"
+                    />
+                  ) :
+                  currentIndex === 2 ? (
+                  <img 
+                    src="/images/apollo-file-management.jpg" 
+                    alt={currentProject.title}
+                    className="w-full h-full object-cover"
+                  />
+                ) : currentIndex === 3 ? (
+                  <img 
+                    src="/images/mini-ethereum.png" 
+                    alt={currentProject.title}
+                    className="w-full h-full object-cover"
+                  />
+                ) : (
+                  <div className="bg-gradient-to-br from-blue-600/20 to-purple-600/20 w-full h-full flex items-center justify-center">
+                    <div className="text-6xl text-white/50">
+                      {currentIndex === 0 ? '📱' : '🔧'}
+                    </div>
                   </div>
+                )}
+              </div>
+              
+              {/* Overlay */}
+              <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
+              
+              {/* Project info */}
+              <div className="absolute bottom-6 left-6 right-6">
+                <h3 className="text-xl font-bold text-white mb-2">{currentProject.title}</h3>
+                <div className="flex gap-2">
+                  <Button 
+                    size="sm" 
+                    variant="ghost" 
+                    className="p-2 h-8 w-8 hover:bg-white/10"
+                    onClick={() => window.open(currentProject.githubUrl, '_blank')}
+                    disabled={currentProject.githubUrl === '#'}
+                  >
+                    <Github className="h-4 w-4" />
+                  </Button>
+                  <Button 
+                    size="sm" 
+                    variant="ghost" 
+                    className="p-2 h-8 w-8 hover:bg-white/10"
+                    onClick={() => window.open(currentProject.githubUrl, '_blank')}
+                    disabled={currentProject.githubUrl === '#'}
+                  >
+                    <ExternalLink className="h-4 w-4" />
+                  </Button>
                 </div>
               </div>
             </div>
-          ) : (
-            // Regular card for other projects
-            <TiltCard 
-              key={currentIndex} // Force re-mount for animation
-              className="w-full max-w-md h-96"
-              intensity={8}
-              scale={1.02}
-            >
-              <div className="relative w-full h-full bg-gradient-to-br from-gray-900 to-gray-800 rounded-2xl border border-gray-700 overflow-hidden">
-                {/* Project Image */}
-                <div className="absolute inset-4 rounded-xl overflow-hidden">
-                  {currentIndex === 2 ? (
-                    <img 
-                      src="/images/apollo-file-management.jpg" 
-                      alt={currentProject.title}
-                      className="w-full h-full object-cover"
-                    />
-                  ) : currentIndex === 3 ? (
-                    <img 
-                      src="/images/mini-ethereum.png" 
-                      alt={currentProject.title}
-                      className="w-full h-full object-cover"
-                    />
-                  ) : (
-                    <div className="bg-gradient-to-br from-blue-600/20 to-purple-600/20 w-full h-full flex items-center justify-center">
-                      <div className="text-6xl text-white/50">🔧</div>
-                    </div>
-                  )}
-                </div>
-                
-                {/* Overlay */}
-                <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
-                
-                {/* Project info */}
-                <div className="absolute bottom-6 left-6 right-6">
-                  <div className="text-sm text-gray-400 mb-2">{currentProject.category}</div>
-                  <h3 className="text-xl font-bold text-white mb-2">{currentProject.title}</h3>
-                  <div className="flex gap-2">
-                    <Button 
-                      size="sm" 
-                      variant="ghost" 
-                      className="p-2 h-8 w-8 hover:bg-white/10"
-                      onClick={() => window.open(currentProject.githubUrl, '_blank')}
-                      disabled={currentProject.githubUrl === '#'}
-                    >
-                      <Github className="h-4 w-4" />
-                    </Button>
-                    <Button 
-                      size="sm" 
-                      variant="ghost" 
-                      className="p-2 h-8 w-8 hover:bg-white/10"
-                      onClick={() => window.open(currentProject.githubUrl, '_blank')}
-                      disabled={currentProject.githubUrl === '#'}
-                    >
-                      <ExternalLink className="h-4 w-4" />
-                    </Button>
-                  </div>
-                </div>
-              </div>
-            </TiltCard>
-          )}
+          </TiltCard>
         </div>
 
         {/* Project Details */}
@@ -157,7 +129,8 @@ export function ProjectCarousel({ projects }: ProjectCarouselProps) {
           <div className="space-y-6">
             <div>
               <div className="text-sm text-gray-500 mb-2">{currentProject.year}</div>
-              <h3 className="text-3xl lg:text-4xl font-bold mb-4 text-white">{currentProject.title}</h3>
+              <h3 className="text-3xl lg:text-4xl font-bold mb-2 text-white">{currentProject.title}</h3>
+              <div className="text-sm text-gray-400 mb-4">{currentProject.category}</div>
               <p className="text-gray-400 text-lg leading-relaxed">
                 {currentProject.description}
               </p>
