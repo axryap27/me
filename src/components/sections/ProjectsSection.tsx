@@ -3,10 +3,10 @@ import { ProjectCarousel } from "@/components/ui/ProjectCarousel";
 export function ProjectsSection() {
   const projects = [
     {
-      title: "Atlas",
+      title: "atlas",
       description: "Full-stack cross-platform mobile application designed for socializing fitness tracking & progression.",
-      tech: ["React Native", "Node.js", "Javascript", "PostgreSQL", "REST APIs"],
-      category: "Mobile Development",
+      tech: ["React Native", "Node.js", "TypeScript", "Supabase", "REST APIs"],
+      category: "Mobile App",
       year: "Currently Building",
       githubUrl: "https://github.com/axryap27/atlas",
     },
@@ -15,7 +15,7 @@ export function ProjectsSection() {
       description: "CLI Debugging tool built in C++ for NU Python programs, featuring a symbolic RAM system.",
       tech: ["C++", "C", "Python", "Data Structures"],
       category: "Introductory systems programming",
-      year: "2025",
+      year: "May 2025",
       githubUrl: "https://github.com/axryap27/python-debugger",
     },
     {
@@ -30,8 +30,8 @@ export function ProjectsSection() {
       title: "Mini-Ethereum",
       description: "Python-based mini-Ethereum with PoW blockchain, ECDSA wallets, and CLI for mining and transactions.",
       tech: ["Python", "Cryptography", "Blockchain"],
-      category: "Backend Systems",
-      year: "2024-2025",
+      category: "Backend Systems, Blockchain Simulation",
+      year: "Jan 2025 - Present",
       githubUrl: "https://github.com/axryap27/mini-ethereum",
     },
   ];
