@@ -67,7 +67,7 @@ export function ProjectCarousel({ projects }: ProjectCarouselProps) {
                 {
                   currentIndex === 0 ? (
                     <img 
-                      src="/images/altas.png" 
+                      src="/images/atlas.png" 
                       alt={currentProject.title}
                       className="w-full h-full object-cover"
                     />
