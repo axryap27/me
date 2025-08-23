@@ -31,7 +31,7 @@ export function ProjectsSection() {
       description: "Python-based mini-Ethereum with PoW blockchain, ECDSA wallets, and CLI for mining and transactions.",
       tech: ["Python", "Cryptography", "Blockchain"],
       category: "Backend Systems, Blockchain Simulation",
-      year: "Jan 2025 - Present",
+      year: "Jan 2025 - Aug 2025",
       githubUrl: "https://github.com/axryap27/mini-ethereum",
     },
   ];
