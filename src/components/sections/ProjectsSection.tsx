@@ -9,6 +9,7 @@ export function ProjectsSection() {
       category: "Mobile App",
       year: "Currently Building",
       githubUrl: "https://github.com/axryap27/atlas",
+      images: ["/images/atlas.png", "/images/atlas4.png", "/images/atlas2.png", "/images/atlas3.png"],
     },
     {
       title: "Python Debugger Engine",
@@ -17,6 +18,7 @@ export function ProjectsSection() {
       category: "Introductory systems programming",
       year: "May 2025",
       githubUrl: "https://github.com/axryap27/python-debugger",
+      images: [],
     },
     {
       title: "File Manager System",
@@ -25,6 +27,7 @@ export function ProjectsSection() {
       category: "Agents and backend systems",
       year: "Currently building",
       githubUrl: "https://github.com/axryap27/apollo",
+      images: ["/images/apollo-file-management.jpg"],
     },
     {
       title: "Mini-Ethereum",
@@ -33,6 +36,7 @@ export function ProjectsSection() {
       category: "Backend Systems, Blockchain Simulation",
       year: "Jan 2025 - Aug 2025",
       githubUrl: "https://github.com/axryap27/mini-ethereum",
+      images: ["/images/mini-ethereum.png"],
     },
   ];
 

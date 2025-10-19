@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { TiltCard } from '@/components/ui/TiltCard';
+import { ImageStack } from '@/components/ui/ImageStack';
 import { Button } from '@/components/ui/button';
 import { ChevronLeft, ChevronRight, Github, ExternalLink } from 'lucide-react';
 
@@ -10,6 +11,7 @@ interface Project {
   category: string;
   year: string;
   githubUrl: string;
+  images?: string[];
 }
 
 interface ProjectCarouselProps {
@@ -53,39 +55,24 @@ export function ProjectCarousel({ projects }: ProjectCarouselProps) {
 
         {/* Project Card */}
         <div className="flex-1 flex justify-center">
-          <TiltCard 
+          <TiltCard
             key={currentIndex} // Force re-mount for animation
-            className={currentIndex === 0 ? "w-80 h-[600px]" : "w-full max-w-md h-96"}
+            className={currentIndex === 0 ? "w-[325px] h-[700px]" : "w-full max-w-md h-96"}
             intensity={8}
             scale={1.02}
           >
-            <div className={`relative w-full h-full bg-gradient-to-br from-gray-900 to-gray-800 rounded-2xl border border-gray-700 overflow-hidden ${
-              currentIndex === 0 ? 'shadow-2xl shadow-black/60 before:absolute before:top-1 before:left-1 before:w-full before:h-full before:bg-gradient-to-br before:from-gray-800 before:to-gray-700 before:rounded-2xl before:-z-10 before:transform before:translate-x-1 before:translate-y-1' : ''
+            <div className={`relative w-full h-full bg-gradient-to-br from-gray-900 to-gray-800 rounded-2xl border border-gray-700 ${
+              currentIndex === 0 ? '' : 'overflow-hidden'
             }`}>
               {/* Project Image */}
-              <div className="absolute inset-2 rounded-xl overflow-hidden">
-                {
-                  currentIndex === 0 ? (
-                    <img 
-                      src="/images/atlas.png" 
-                      alt={currentProject.title}
-                      className="w-full h-full object-cover"
-                    />
-                  ) :
-                  currentIndex === 2 ? (
-                  <img 
-                    src="/images/apollo-file-management.jpg" 
+              <div className="absolute inset-2 rounded-xl">
+                {currentProject.images && currentProject.images.length > 0 ? (
+                  <ImageStack
+                    images={currentProject.images}
                     alt={currentProject.title}
-                    className="w-full h-full object-cover"
-                  />
-                ) : currentIndex === 3 ? (
-                  <img 
-                    src="/images/mini-ethereum.png" 
-                    alt={currentProject.title}
-                    className="w-full h-full object-cover"
                   />
                 ) : (
-                  <div className="bg-gradient-to-br from-blue-600/20 to-purple-600/20 w-full h-full flex items-center justify-center">
+                  <div className="bg-gradient-to-br from-blue-600/20 to-purple-600/20 w-full h-full flex items-center justify-center overflow-hidden rounded-xl">
                     <div className="text-6xl text-white/50">
                       {currentIndex === 0 ? '📱' : '🔧'}
                     </div>
