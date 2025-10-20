@@ -1,13 +1,16 @@
 import { useState, useEffect } from 'react';
+import { Link, useNavigate, useLocation } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 
 interface NavigationProps {
-  activeSection: string;
-  onSectionChange: (section: string) => void;
+  activeSection?: string;
+  onSectionChange?: (section: string) => void;
 }
 
 export function Navigation({ activeSection, onSectionChange }: NavigationProps) {
   const [isScrolled, setIsScrolled] = useState(false);
+  const navigate = useNavigate();
+  const location = useLocation();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -19,17 +22,44 @@ export function Navigation({ activeSection, onSectionChange }: NavigationProps) 
   }, []);
 
   const sections = [
-    { id: 'hero', label: 'Home' },
-    { id: 'projects', label: 'Projects' },
-    { id: 'contact', label: 'Contact' },
+    { id: 'home', label: 'Home', path: '/#home' },
+    { id: 'experience', label: 'Experience', path: '/#experience' },
+    { id: 'projects', label: 'Projects', path: '/projects' },
+    { id: 'contact', label: 'Contact', path: '/#contact' },
   ];
 
-  const scrollToSection = (sectionId: string) => {
-    const element = document.getElementById(sectionId);
-    if (element) {
-      element.scrollIntoView({ behavior: 'smooth' });
-      onSectionChange(sectionId);
+  const handleNavigation = (section: { id: string; path: string }) => {
+    if (section.path.startsWith('/#')) {
+      // Navigate to home page section
+      if (location.pathname !== '/') {
+        navigate('/');
+        setTimeout(() => {
+          const sectionId = section.path.substring(2);
+          const element = document.getElementById(sectionId);
+          if (element) {
+            element.scrollIntoView({ behavior: 'smooth' });
+            onSectionChange?.(sectionId);
+          }
+        }, 100);
+      } else {
+        const sectionId = section.path.substring(2);
+        const element = document.getElementById(sectionId);
+        if (element) {
+          element.scrollIntoView({ behavior: 'smooth' });
+          onSectionChange?.(sectionId);
+        }
+      }
+    } else {
+      // Navigate to separate page
+      navigate(section.path);
     }
+  };
+
+  const isActive = (section: { id: string; path: string }) => {
+    if (section.path === '/projects') {
+      return location.pathname === '/projects';
+    }
+    return activeSection === section.id;
   };
 
   return (
@@ -40,16 +70,28 @@ export function Navigation({ activeSection, onSectionChange }: NavigationProps) 
     >
       <div className="container mx-auto px-6">
         <div className="flex items-center justify-between">
-          <div className="text-2xl font-bold text-white">
-          </div>
-          
+          {/* Logo */}
+          <Link
+            to="/"
+            className="flex items-center"
+            onClick={() => {
+              window.scrollTo({ top: 0, behavior: 'smooth' });
+            }}
+          >
+            <img
+              src="/images/favicon.png"
+              alt="Logo"
+              className="h-10 w-10 object-contain"
+            />
+          </Link>
+
           <div className="flex items-center space-x-8">
             {sections.map((section) => (
               <button
                 key={section.id}
-                onClick={() => scrollToSection(section.id)}
+                onClick={() => handleNavigation(section)}
                 className={`text-sm font-medium transition-all duration-300 hover:text-white ${
-                  activeSection === section.id
+                  isActive(section)
                     ? 'text-white'
                     : 'text-gray-400'
                 }`}

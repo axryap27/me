@@ -5,9 +5,10 @@ import { Button } from './button';
 interface ImageStackProps {
   images: string[];
   alt: string;
+  objectPosition?: string;
 }
 
-export function ImageStack({ images, alt }: ImageStackProps) {
+export function ImageStack({ images, alt, objectPosition = 'center' }: ImageStackProps) {
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
 
   const nextImage = (e: React.MouseEvent) => {
@@ -90,6 +91,7 @@ export function ImageStack({ images, alt }: ImageStackProps) {
             src={images[currentImageIndex]}
             alt={`${alt} - Image ${currentImageIndex + 1}`}
             className="w-full h-full object-cover transition-opacity duration-300"
+            style={{ objectPosition }}
             key={currentImageIndex}
           />
 

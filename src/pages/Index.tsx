@@ -1,16 +1,16 @@
 import { useState, useEffect } from 'react';
 import { Navigation } from '@/components/Navigation';
-import { HeroSection } from '@/components/sections/HeroSection';
-import { ProjectsSection } from '@/components/sections/ProjectsSection';
+import { HomeSection } from '@/components/sections/HomeSection';
+import { ExperienceSection } from '@/components/sections/ExperienceSection';
 import { ContactSection } from '@/components/sections/ContactSection';
 import { Scene3D } from '@/components/3d/Scene3D';
 
 const Index = () => {
-  const [activeSection, setActiveSection] = useState('hero');
+  const [activeSection, setActiveSection] = useState('home');
 
   useEffect(() => {
     const handleScroll = () => {
-      const sections = ['hero', 'projects', 'contact'];
+      const sections = ['home', 'experience', 'contact'];
       const scrollPosition = window.scrollY + 100;
 
       for (let i = sections.length - 1; i >= 0; i--) {
@@ -32,12 +32,12 @@ const Index = () => {
       <div className="fixed inset-0 z-0">
         <Scene3D />
       </div>
-      
+
       {/* Content */}
       <div className="relative z-10">
         <Navigation activeSection={activeSection} onSectionChange={setActiveSection} />
-        <HeroSection />
-        <ProjectsSection />
+        <HomeSection />
+        <ExperienceSection />
         <ContactSection />
       </div>
     </div>
