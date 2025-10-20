@@ -45,74 +45,12 @@ export function HeroSection() {
 
   return (
     <section id="hero" className="relative min-h-screen flex items-center justify-center overflow-hidden">
-      
-      {/* Main Content */}
-      <div className="flex flex-col lg:flex-row items-center justify-center gap-16 px-8 py-20 max-w-7xl mx-auto">
-        
-        {/* Left Side - Profile Card */}
-        <div className={`flex-shrink-0 transition-all duration-1000 ease-out ${
-          animationStage >= 1 
-            ? 'opacity-100 translate-y-0' 
-            : 'opacity-0 translate-y-8'
-        }`}>
-          <TiltCard 
-            className="w-96 h-[28rem]"
-            intensity={12}
-            scale={1.05}
-            perspective={1200}
-          >
-            <div className="relative w-full h-full p-[2px] bg-gradient-to-r from-blue-500/30 via-purple-500/30 to-pink-500/30 rounded-2xl">
-              <div className="relative w-full h-full bg-gradient-to-br from-gray-900 to-black rounded-2xl overflow-hidden">
-                {/* Profile Image - Top 2/3 */}
-                <img 
-                  src="/images/profile.jpg" 
-                  alt="Aarya Patel"
-                  className="absolute top-0 left-0 w-full h-2/3 object-cover"
-                />
-                
-                {/* Gradient Overlay */}
-                <div className="absolute inset-0 bg-gradient-to-t from-black via-black/20 to-transparent" />
-                
-                {/* Card Content */}
-                <div className="absolute bottom-6 left-6 right-6 text-white">
-                <h3 className="text-2xl font-bold mb-2 font-sans">Aarya Patel</h3>
-                <p className="text-gray-300 text-base mb-4 font-light">CompE & Math @ Northwestern</p>
-                <div className="flex gap-2">
-                  <Button 
-                    size="sm" 
-                    variant="ghost" 
-                    className="p-2 h-8 w-8 hover:bg-white/10"
-                    onClick={() => window.open('https://github.com/axryap27')}
-                  >
-                    <Github className="h-4 w-4" />
-                  </Button>
-                  <Button 
-                    size="sm" 
-                    variant="ghost" 
-                    className="p-2 h-8 w-8 hover:bg-white/10"
-                    onClick={() => window.open('https://linkedin.com/in/aarya-p9')}
-                  >
-                    <Linkedin className="h-4 w-4" />
-                  </Button>
-                  <Button 
-                    size="sm" 
-                    variant="ghost" 
-                    className="p-2 h-8 w-8 hover:bg-white/10"
-                    asChild
-                  >
-                    <a href="mailto:aarya27@gmail.com">
-                      <Mail className="h-4 w-4" />
-                    </a>
-                  </Button>
-                </div>
-              </div>
-            </div>
-            </div>
-          </TiltCard>
-        </div>
 
-        {/* Right Side - Main Content */}
-        <div className="flex-1 text-center lg:text-left max-w-2xl">
+      {/* Main Content */}
+      <div className="flex items-center justify-center px-8 py-20 max-w-4xl mx-auto">
+
+        {/* Centered Content */}
+        <div className="text-center max-w-3xl">
           
           {/* Animated Text */}
           <div className={`text-3xl lg:text-4xl mb-8 font-semibold transition-all duration-1000 ease-out delay-200 ${
@@ -158,13 +96,13 @@ export function HeroSection() {
               : 'opacity-0 translate-y-8'
           }`}>
             Hi I'm Aarya! I'm a student at Northwestern studying Computer Engineering and Math.  
-            Currently seeking 2026 internships in software engineering, cybersecurity, and trading.
+            Currently seeking 2026 internships in software engineering, cybersecurity, and embedded systems.
           </p>
 
           {/* Buttons */}
-          <div className={`flex flex-col sm:flex-row gap-4 justify-center lg:justify-start mb-16 transition-all duration-1000 ease-out delay-600 ${
-            animationStage >= 4 
-              ? 'opacity-100 translate-y-0' 
+          <div className={`flex flex-col sm:flex-row gap-4 justify-center mb-16 transition-all duration-1000 ease-out delay-600 ${
+            animationStage >= 4
+              ? 'opacity-100 translate-y-0'
               : 'opacity-0 translate-y-8'
           }`}>
             <a href="mailto:aarya27@gmail.com" className="inline-block">

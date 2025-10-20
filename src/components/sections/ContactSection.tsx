@@ -49,12 +49,6 @@ export function ContactSection() {
             </div>
           </div>
 
-
-          {/* Footer Note */}
-          <div className="text-gray-500 text-sm">
-            <p>Open to new opportunities worldwide</p>
-          </div>
-
         </div>
       </div>
     </section>
