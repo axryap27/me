@@ -141,7 +141,7 @@ export function HomeSection() {
               {/* Bio Text */}
               <p className="text-gray-400 text-lg leading-relaxed">
                 Hi I'm Aarya! I'm a student at Northwestern studying Computer Engineering and Math.
-                Currently seeking 2026 internships in software engineering, cybersecurity, and trading.
+                Currently seeking 2026 internships in software engineering, firmware, and digital design.
               </p>
 
               {/* Buttons */}

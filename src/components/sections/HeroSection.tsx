@@ -96,7 +96,7 @@ export function HeroSection() {
               : 'opacity-0 translate-y-8'
           }`}>
             Hi I'm Aarya! I'm a student at Northwestern studying Computer Engineering and Math.  
-            Currently seeking 2026 internships in software engineering, cybersecurity, and embedded systems.
+            Currently seeking 2026 internships in software/firmware engineering and digital design.
           </p>
 
           {/* Buttons */}
