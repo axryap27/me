@@ -3,11 +3,31 @@ import { ProjectCard } from "@/components/ui/ProjectCard";
 export function ProjectsSection() {
   const projects = [
     {
+      title: "AXI4-Lite DMA Engine",
+      description: "A memory-mapped DMA subsystem that performs autonomous scatter-gather transfers between system memory (AXI4 memory-mapped) and on-chip SRAM/BRAM.",
+      tech: ["AXI4-Lite", "SystemVerilog", "Shell"],
+      category: "Digital Design, Systems, SoC",
+      year: "Currently Building",
+      githubUrl: "https://github.com/xuyizhou8129/axi-dma-engine",
+      externalUrl: undefined,
+      images: [],
+    },
+    {
+      title: "ESP32 Audio Classifier",
+      description: "Real-time music genre classification on ESP32 using DSP feature extraction and TensorFlow Lite for EdgeML capabilities.",
+      tech: ["C++", "Python", "TensorFlow Lite"],
+      category: "Machine Learning, Embedded Systems, DSP",
+      year: "Currently Building",
+      githubUrl: "https://github.com/axryap27/esp32-audio-classifier",
+      externalUrl: undefined,
+      images: ["/images/esp32_audio_classifier.jpg"],
+    },
+    {
       title: "Atlas",
       description: "Full-stack cross-platform mobile application designed for socializing fitness tracking.",
       tech: ["React Native", "Node.js", "TypeScript", "Supabase", "REST APIs"],
       category: "Mobile App",
-      year: "Currently Building",
+      year: "On Hold",
       githubUrl: "https://github.com/axryap27/atlas",
       externalUrl: undefined,
       images: ["/images/atlas.png", "/images/atlas2.png", "/images/atlas4.png", "/images/atlas3.png"],
@@ -17,7 +37,7 @@ export function ProjectsSection() {
       description: "Embedded Virtual Assistant. Local LLM & voice AI assistant with OS access - Jarvis wannabe.",
       tech: ["Rust", "Objective C", "Swift", "Tauri 2.0", "Agentic AI"],
       category: "Backend systems, local AI agents, OS",
-      year: "Currently Building",
+      year: "On Hold",
       githubUrl: "https://github.com/axryap27/E.V.A.",
       externalUrl: undefined,
       images: ["/images/E.V.A.-mvp.png"],
@@ -39,26 +59,6 @@ export function ProjectsSection() {
       category: "Introductory systems programming",
       year: "May 2025",
       githubUrl: "https://github.com/axryap27/python-debugger",
-      externalUrl: undefined,
-      images: [],
-    },
-    {
-      title: "AXI4-Lite DMA Engine",
-      description: "A memory-mapped DMA subsystem that performs autonomous scatter-gather transfers between system memory (AXI4 memory-mapped) and on-chip SRAM/BRAM.",
-      tech: ["AXI4-Lite", "SystemVerilog", "Shell"],
-      category: "Digital Design, Systems, SoC",
-      year: "Currently Building",
-      githubUrl: "https://github.com/xuyizhou8129/axi-dma-engine",
-      externalUrl: undefined,
-      images: [],
-    },
-    {
-      title: "ESP32 Audio Classifier",
-      description: "Real-time music genre classification on ESP32 using DSP feature extraction and TensorFlow Lite for EdgeML capabilities.",
-      tech: ["C++", "Python", "TensorFlow Lite"],
-      category: "Machine Learning, Embedded Systems, DSP",
-      year: "Currently Building",
-      githubUrl: "https://github.com/axryap27/esp32-audio-classifier",
       externalUrl: undefined,
       images: [],
     },
@@ -103,7 +103,7 @@ export function ProjectsSection() {
                 githubUrl={project.githubUrl}
                 externalUrl={project.externalUrl}
                 images={project.images}
-                size={index === 0 ? 'phone' : 'square'}
+                size={project.title === 'Atlas' ? 'phone' : 'square'}
                 layout="vertical"
               />
             ))}
