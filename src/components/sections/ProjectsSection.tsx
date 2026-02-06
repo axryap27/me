@@ -10,7 +10,7 @@ export function ProjectsSection() {
       year: "Currently Building",
       githubUrl: "https://github.com/xuyizhou8129/axi-dma-engine",
       externalUrl: undefined,
-      images: [],
+      images: ["/images/axi4_dma.webp"],
     },
     {
       title: "ESP32 Audio Classifier",
