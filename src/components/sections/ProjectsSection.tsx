@@ -50,7 +50,7 @@ export function ProjectsSection() {
       year: "Sep 2025 - Oct 2025",
       githubUrl: "https://github.com/axryap27/sentra",
       externalUrl: "https://marketplace.visualstudio.com/items?itemName=aaryapatel.sentra",
-      images: ["/images/apollo-file-management.jpg"],
+      images: ["/images/apollo-file-management.png"],
     },
     {
       title: "Python Debugger Engine",
