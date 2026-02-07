@@ -1,6 +1,14 @@
 export function ExperienceSection() {
   const experiences = [
     {
+      title: "Digital Design Engineer",
+      company: "IEEE Northwestern Branch",
+      period: "Jan 2026 - Present",
+      description: "AXI-DMA Engine in SystemVerilog.",
+      technologies: ["SystemVerilog", "AXI4-Lite", "Shell"],
+      logo: "/images/northwestern_university_ieee_student_branch_logo.jpeg",
+    },
+    {
       title: "Software Engineer Intern",
       company: "Shelter Rock Management",
       period: "June 2025 - Aug 2025",

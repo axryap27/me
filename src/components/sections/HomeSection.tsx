@@ -1,10 +1,14 @@
 import { useState } from 'react';
-import { TiltCard } from '@/components/ui/TiltCard';
+import ProfileCard from '@/components/ui/ProfileCard';
 import { AnimatedText } from '@/components/ui/AnimatedText';
 import { Button } from '@/components/ui/button';
-import { Github, Linkedin, Mail, ExternalLink, ArrowDown } from 'lucide-react';
+import { ExternalLink, ArrowDown } from 'lucide-react';
 
-export function HomeSection() {
+interface HomeSectionProps {
+  isReady: (stage: number) => boolean;
+}
+
+export function HomeSection({ isReady }: HomeSectionProps) {
   const [currentWord, setCurrentWord] = useState('builder.');
   const [showExtraLetter, setShowExtraLetter] = useState(false);
   const [isExiting, setIsExiting] = useState(false);
@@ -44,69 +48,27 @@ export function HomeSection() {
       <div className="flex items-center justify-center px-8 py-20 max-w-6xl mx-auto">
         <div className="flex flex-col lg:flex-row gap-12 items-center">
 
-          {/* Left Side - Profile Card */}
-          <div className="flex-shrink-0">
-            <TiltCard
-              className="w-96 h-[28rem]"
-              intensity={12}
-              scale={1.05}
-              perspective={1200}
-            >
-              <div className="relative w-full h-full p-[2px] bg-gradient-to-r from-blue-500/30 via-purple-500/30 to-pink-500/30 rounded-2xl">
-                <div className="relative w-full h-full bg-gradient-to-br from-gray-900 to-black rounded-2xl overflow-hidden">
-                  {/* Profile Image - Top 2/3 */}
-                  <img
-                    src="/images/profile.jpg"
-                    alt="Aarya Patel"
-                    className="absolute top-0 left-0 w-full h-2/3 object-cover"
-                  />
-
-                  {/* Gradient Overlay */}
-                  <div className="absolute inset-0 bg-gradient-to-t from-black via-black/20 to-transparent" />
-
-                  {/* Card Content */}
-                  <div className="absolute bottom-6 left-6 right-6 text-white">
-                    <h3 className="text-2xl font-bold mb-2 font-sans">Aarya Patel</h3>
-                    <p className="text-gray-300 text-base mb-4 font-light">CompE & Math @ Northwestern</p>
-                    <div className="flex gap-2">
-                      <Button
-                        size="sm"
-                        variant="ghost"
-                        className="p-2 h-8 w-8 hover:bg-white/10"
-                        onClick={() => window.open('https://github.com/axryap27')}
-                      >
-                        <Github className="h-4 w-4" />
-                      </Button>
-                      <Button
-                        size="sm"
-                        variant="ghost"
-                        className="p-2 h-8 w-8 hover:bg-white/10"
-                        onClick={() => window.open('https://linkedin.com/in/aarya-p9')}
-                      >
-                        <Linkedin className="h-4 w-4" />
-                      </Button>
-                      <Button
-                        size="sm"
-                        variant="ghost"
-                        className="p-2 h-8 w-8 hover:bg-white/10"
-                        asChild
-                      >
-                        <a href="mailto:aarya27@gmail.com">
-                          <Mail className="h-4 w-4" />
-                        </a>
-                      </Button>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </TiltCard>
+          {/* Left Side - Profile Card (Stage 2: scale-fade) */}
+          <div className={`flex-shrink-0 ${isReady(2) ? 'landing-scale-fade' : 'landing-hidden'}`}>
+            <ProfileCard
+              avatarUrl="/images/profile.jpg"
+              name="Aarya Patel"
+              title="CompE & Math @ Northwestern"
+              handle="axryap27"
+              status=""
+              contactText="Contact"
+              showUserInfo={true}
+              onContactClick={() => window.open('mailto:aarya27@gmail.com')}
+              enableTilt={true}
+              behindGlowEnabled={true}
+            />
           </div>
 
           {/* Right Side - Bio Section */}
           <div className="flex-1 max-w-xl">
             <div className="space-y-8">
-              {/* Animated Text */}
-              <div className="text-3xl lg:text-4xl font-semibold">
+              {/* Animated Text (Stage 3: fade-up) */}
+              <div className={`text-3xl lg:text-4xl font-semibold ${isReady(3) ? 'landing-fade-up' : 'landing-hidden'}`}>
                 <span className="text-gray-400">I'm a</span>
                 <span
                   className={`text-gray-400 ${
@@ -138,14 +100,14 @@ export function HomeSection() {
                 />
               </div>
 
-              {/* Bio Text */}
-              <p className="text-gray-400 text-lg leading-relaxed">
+              {/* Bio Text (Stage 4: fade-up) */}
+              <p className={`text-gray-400 text-lg leading-relaxed ${isReady(4) ? 'landing-fade-up' : 'landing-hidden'}`}>
                 Hi I'm Aarya! I'm a student at Northwestern studying Computer Engineering and Math.
                 Currently seeking 2026 internships in software engineering, firmware, and digital design.
               </p>
 
-              {/* Buttons */}
-              <div className="flex flex-col sm:flex-row gap-4">
+              {/* Buttons (Stage 5: fade-up) */}
+              <div className={`flex flex-col sm:flex-row gap-4 ${isReady(5) ? 'landing-fade-up' : 'landing-hidden'}`}>
                 <a href="mailto:aarya27@gmail.com" className="inline-block">
                   <Button
                     size="lg"
@@ -169,6 +131,17 @@ export function HomeSection() {
             </div>
           </div>
         </div>
+      </div>
+
+      {/* Scroll indicator (Stage 7: fade-up) */}
+      <div className={`absolute bottom-8 left-1/2 transform -translate-x-1/2 ${isReady(7) ? 'landing-fade-up' : 'landing-hidden'}`}>
+        <Button
+          variant="ghost"
+          onClick={scrollToNext}
+          className="animate-bounce text-gray-500 hover:text-white transition-colors"
+        >
+          <ArrowDown className="h-5 w-5" />
+        </Button>
       </div>
     </section>
   );
