@@ -5,9 +5,10 @@ import { Button } from '@/components/ui/button';
 interface NavigationProps {
   activeSection?: string;
   onSectionChange?: (section: string) => void;
+  animationReady?: boolean;
 }
 
-export function Navigation({ activeSection, onSectionChange }: NavigationProps) {
+export function Navigation({ activeSection, onSectionChange, animationReady = true }: NavigationProps) {
   const [isScrolled, setIsScrolled] = useState(false);
   const navigate = useNavigate();
   const location = useLocation();
@@ -66,7 +67,7 @@ export function Navigation({ activeSection, onSectionChange }: NavigationProps) 
     <nav
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
         isScrolled ? 'bg-black/80 backdrop-blur-md py-4' : 'py-8'
-      }`}
+      } ${animationReady ? 'landing-fade-in' : 'landing-hidden'}`}
     >
       <div className="container mx-auto px-6">
         <div className="flex items-center justify-between">

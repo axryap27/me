@@ -3,10 +3,12 @@ import { Navigation } from '@/components/Navigation';
 import { HomeSection } from '@/components/sections/HomeSection';
 import { ExperienceSection } from '@/components/sections/ExperienceSection';
 import { ContactSection } from '@/components/sections/ContactSection';
-import { Scene3D } from '@/components/3d/Scene3D';
+import { useLandingAnimation } from '@/hooks/useLandingAnimation';
+import Galaxy from '@/components/3d/Galaxy';
 
 const Index = () => {
   const [activeSection, setActiveSection] = useState('home');
+  const { stage, isReady, isComplete } = useLandingAnimation();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -28,15 +30,11 @@ const Index = () => {
 
   return (
     <div className="min-h-screen bg-black text-white relative">
-      {/* Global 3D Background */}
-      <div className="fixed inset-0 z-0">
-        <Scene3D />
-      </div>
-
+      <Galaxy />
       {/* Content */}
       <div className="relative z-10">
-        <Navigation activeSection={activeSection} onSectionChange={setActiveSection} />
-        <HomeSection />
+        <Navigation activeSection={activeSection} onSectionChange={setActiveSection} animationReady={isReady(1)} />
+        <HomeSection isReady={isReady} />
         <ExperienceSection />
         <ContactSection />
       </div>

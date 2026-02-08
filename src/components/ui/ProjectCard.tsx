@@ -33,14 +33,14 @@ export function ProjectCard({
 
   const cardDimensions = size === 'phone'
     ? isExpanded
-      ? "w-[325px] h-[700px]"
-      : "w-[175px] h-[350px]"
-    : "w-[350px] h-[350px]";
+      ? "w-[280px] h-[580px]"
+      : "w-[160px] h-[320px]"
+    : "w-[300px] h-[300px]";
 
   const isVerticalLayout = layout === 'vertical';
 
   return (
-    <div className={`flex ${isVerticalLayout ? 'flex-col' : 'flex-col lg:flex-row'} items-center gap-8 ${isVerticalLayout ? '' : 'lg:gap-12'}`}>
+    <div className={`flex ${isVerticalLayout ? 'flex-col' : 'flex-col lg:flex-row'} items-center gap-4 ${isVerticalLayout ? '' : 'lg:gap-8'}`}>
       {/* Project Card Image */}
       <div className="flex-shrink-0">
         <TiltCard
@@ -91,7 +91,7 @@ export function ProjectCard({
             )}
 
             {/* Project info on card */}
-            <div className="absolute bottom-6 left-6 right-6 z-10">
+            <div className="absolute bottom-4 left-4 right-4 z-10">
               <div className="flex gap-2">
                 {githubUrl && githubUrl !== '#' && (
                   <Button
@@ -126,22 +126,22 @@ export function ProjectCard({
       </div>
 
       {/* Project Details */}
-      <div className="flex-1 max-w-xl">
-        <div className="space-y-6">
+      <div className="flex-1 max-w-[300px]">
+        <div className="space-y-2">
           <div>
-            <div className="text-sm text-gray-500 mb-2">{year}</div>
-            <h3 className="text-2xl lg:text-3xl font-bold mb-2 text-white">{title}</h3>
-            <div className="text-sm text-gray-400 mb-4">{category}</div>
-            <p className="text-gray-400 text-lg leading-relaxed">
+            <div className="text-xs text-gray-500 mb-0.5">{year}</div>
+            <h3 className="text-base font-bold mb-0.5 text-white">{title}</h3>
+            <div className="text-xs text-gray-400 mb-1">{category}</div>
+            <p className="text-gray-400 text-sm leading-snug line-clamp-3">
               {description}
             </p>
           </div>
 
-          <div className="flex flex-wrap gap-3">
+          <div className="flex flex-wrap gap-1.5">
             {tech.map((techItem, techIndex) => (
               <span
                 key={techIndex}
-                className="px-3 py-1 text-sm bg-gray-800 text-gray-300 rounded-full border border-gray-700"
+                className="px-2 py-0.5 text-xs bg-gray-800 text-gray-300 rounded-full border border-gray-700"
               >
                 {techItem}
               </span>

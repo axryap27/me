@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 import { Navigation } from '@/components/Navigation';
 import { ProjectsSection } from '@/components/sections/ProjectsSection';
-import { Scene3D } from '@/components/3d/Scene3D';
+import Galaxy from '@/components/3d/Galaxy';
 
 export default function Projects() {
   useEffect(() => {
@@ -10,9 +10,9 @@ export default function Projects() {
 
   return (
     <div className="min-h-screen bg-black text-white">
-      <Scene3D />
+      <Galaxy />
       <Navigation />
-      <div className="pt-24">
+      <div className="relative z-10 pt-24">
         <ProjectsSection />
       </div>
     </div>
