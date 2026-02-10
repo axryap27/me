@@ -1,36 +1,70 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import { Navigation } from '@/components/Navigation';
 import { HomeSection } from '@/components/sections/HomeSection';
 import { ExperienceSection } from '@/components/sections/ExperienceSection';
 import { ContactSection } from '@/components/sections/ContactSection';
 import { useLandingAnimation } from '@/hooks/useLandingAnimation';
-import Galaxy from '@/components/3d/Galaxy';
+import FloatingLines from '@/components/backgrounds/FloatingLines';
 
 const Index = () => {
   const [activeSection, setActiveSection] = useState('home');
+  const [hyperProgress, setHyperProgress] = useState(0);
   const { stage, isReady, isComplete } = useLandingAnimation();
 
-  useEffect(() => {
-    const handleScroll = () => {
-      const sections = ['home', 'experience', 'contact'];
-      const scrollPosition = window.scrollY + 100;
+  const handleScroll = useCallback(() => {
+    const sections = ['home', 'experience', 'contact'];
+    const scrollPosition = window.scrollY + 100;
 
-      for (let i = sections.length - 1; i >= 0; i--) {
-        const section = document.getElementById(sections[i]);
-        if (section && section.offsetTop <= scrollPosition) {
-          setActiveSection(sections[i]);
-          break;
-        }
+    for (let i = sections.length - 1; i >= 0; i--) {
+      const section = document.getElementById(sections[i]);
+      if (section && section.offsetTop <= scrollPosition) {
+        setActiveSection(sections[i]);
+        break;
       }
-    };
+    }
 
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
+    // Calculate hyperspace progress: 0 at top of home, 1 when reaching experience
+    const experienceEl = document.getElementById('experience');
+    if (experienceEl) {
+      const triggerStart = window.innerHeight * 0.3; // start effect after scrolling 30% of viewport
+      const triggerEnd = experienceEl.offsetTop;
+      const scrollY = window.scrollY;
+
+      if (scrollY <= triggerStart) {
+        setHyperProgress(0);
+      } else if (scrollY >= triggerEnd) {
+        setHyperProgress(1);
+      } else {
+        setHyperProgress((scrollY - triggerStart) / (triggerEnd - triggerStart));
+      }
+    }
   }, []);
+
+  useEffect(() => {
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, [handleScroll]);
 
   return (
     <div className="min-h-screen bg-black text-white relative">
-      <Galaxy />
+      {/* Floating Lines — fixed behind content, hyperspace on scroll */}
+      <div
+        className="fixed inset-0 z-[1]"
+        style={{ opacity: 1 - hyperProgress * 0.7 }}
+      >
+        <FloatingLines
+          enabledWaves={['top', 'middle', 'bottom']}
+          lineCount={5}
+          lineDistance={5}
+          linesGradient={['#4a90d9', '#6bb5ff', '#99d1ff']}
+          bendRadius={5}
+          bendStrength={-0.5}
+          interactive
+          parallax
+          mixBlendMode="screen"
+          hyperProgress={hyperProgress}
+        />
+      </div>
       {/* Content */}
       <div className="relative z-10">
         <Navigation activeSection={activeSection} onSectionChange={setActiveSection} animationReady={isReady(1)} />
