@@ -1,6 +1,14 @@
 export function ExperienceSection() {
   const experiences = [
     {
+      title: "Research Assistant",
+      company: "MAGICS Lab",
+      period: "Feb 2026 - Present",
+      description: "MAGICS Lab",
+      technologies: [],
+      logo: "/images/cs_research.png",
+    },
+    {
       title: "Digital Design Engineer",
       company: "IEEE Northwestern Branch",
       period: "Jan 2026 - Present",
