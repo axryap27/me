@@ -1,8 +1,8 @@
 import { useState } from 'react';
-import ProfileCard from '@/components/ui/ProfileCard';
+import { TiltCard } from '@/components/ui/TiltCard';
 import { AnimatedText } from '@/components/ui/AnimatedText';
 import { Button } from '@/components/ui/button';
-import { ExternalLink, ArrowDown } from 'lucide-react';
+import { ExternalLink, ArrowDown, Github, Linkedin, Mail } from 'lucide-react';
 
 interface HomeSectionProps {
   isReady: (stage: number) => boolean;
@@ -50,18 +50,47 @@ export function HomeSection({ isReady }: HomeSectionProps) {
 
           {/* Left Side - Profile Card (Stage 2: scale-fade) */}
           <div className={`flex-shrink-0 ${isReady(2) ? 'landing-scale-fade' : 'landing-hidden'}`}>
-            <ProfileCard
-              avatarUrl="/images/profile.jpg"
-              name="Aarya Patel"
-              title="CompE & Math @ Northwestern"
-              handle="axryap27"
-              status=""
-              contactText="Contact"
-              showUserInfo={true}
-              onContactClick={() => window.open('mailto:aarya27@gmail.com')}
-              enableTilt={true}
-              behindGlowEnabled={true}
-            />
+            <TiltCard className="rounded-[30px] overflow-hidden" intensity={10}>
+              <div className="relative w-[340px] h-[474px] bg-black/90">
+                {/* Full background photo */}
+                <img
+                  src="/images/profile.jpg"
+                  alt="Aarya Patel"
+                  className="absolute inset-0 w-full h-full object-cover"
+                />
+
+                {/* Name & title overlay at top */}
+                <div className="absolute top-8 left-0 right-0 text-center z-10">
+                  <h3 className="font-['JetBrains_Mono'] font-semibold text-3xl text-white drop-shadow-lg">
+                    Aarya Patel
+                  </h3>
+                  <p className="font-['JetBrains_Mono'] font-semibold text-sm text-white/80 drop-shadow-lg mt-1">
+                    CompE & Math @ Northwestern
+                  </p>
+                </div>
+
+                {/* Bottom bar */}
+                <div className="absolute bottom-5 left-5 right-5 z-10 flex items-center justify-between bg-white/10 backdrop-blur-[30px] border border-white/10 rounded-2xl px-3.5 py-3">
+                  <div className="flex items-center gap-3">
+                    <div className="w-10 h-10 rounded-full overflow-hidden border border-white/10 flex-shrink-0">
+                      <img src="/images/profile.jpg" alt="Mini avatar" className="w-full h-full object-cover" />
+                    </div>
+                    <span className="text-sm font-medium text-white/90">@axryap27</span>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <a href="https://github.com/axryap27" target="_blank" rel="noopener noreferrer" className="p-2 rounded-lg border border-white/10 text-white/80 hover:text-white hover:border-white/40 transition-all">
+                      <Github className="w-4 h-4" />
+                    </a>
+                    <a href="https://linkedin.com/in/aaryapatel27" target="_blank" rel="noopener noreferrer" className="p-2 rounded-lg border border-white/10 text-white/80 hover:text-white hover:border-white/40 transition-all">
+                      <Linkedin className="w-4 h-4" />
+                    </a>
+                    <a href="mailto:aarya27@gmail.com" className="p-2 rounded-lg border border-white/10 text-white/80 hover:text-white hover:border-white/40 transition-all">
+                      <Mail className="w-4 h-4" />
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </TiltCard>
           </div>
 
           {/* Right Side - Bio Section */}
