@@ -58,9 +58,11 @@ const Index = () => {
           lineDistance={5}
           linesGradient={['#4a90d9', '#6bb5ff', '#99d1ff']}
           bendRadius={5}
-          bendStrength={-0.5}
+          bendStrength={-0.3}
+          mouseDamping={0.05}
           interactive
           parallax
+          parallaxStrength={0.1}
           mixBlendMode="screen"
           hyperProgress={hyperProgress}
         />
