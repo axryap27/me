@@ -71,7 +71,7 @@ export function HomeSection({ isReady }: HomeSectionProps) {
                     <a href="https://github.com/axryap27" target="_blank" rel="noopener noreferrer" className="p-2 rounded-lg border border-white/10 text-white/80 hover:text-white hover:border-white/40 transition-all">
                       <Github className="w-4 h-4" />
                     </a>
-                    <a href="https://linkedin.com/in/aarya-9" target="_blank" rel="noopener noreferrer" className="p-2 rounded-lg border border-white/10 text-white/80 hover:text-white hover:border-white/40 transition-all">
+                    <a href="https://linkedin.com/in/aarya-p9" target="_blank" rel="noopener noreferrer" className="p-2 rounded-lg border border-white/10 text-white/80 hover:text-white hover:border-white/40 transition-all">
                       <Linkedin className="w-4 h-4" />
                     </a>
                     <a href="mailto:aarya27@gmail.com" className="p-2 rounded-lg border border-white/10 text-white/80 hover:text-white hover:border-white/40 transition-all">
