@@ -2,9 +2,9 @@ export function ExperienceSection() {
   const experiences = [
     {
       title: "Research Assistant",
-      company: "MAGICS Lab",
+      company: "Northwestern Computer Science Department",
       period: "Feb 2026 - Present",
-      description: "MAGICS Lab",
+      description: "Adaptive/dual process reasoning in diffusion models",
       technologies: [],
       logo: "/images/cs_research.png",
     },
