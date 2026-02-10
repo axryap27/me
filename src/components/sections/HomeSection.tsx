@@ -50,8 +50,7 @@ export function HomeSection({ isReady }: HomeSectionProps) {
 
           {/* Left Side - Profile Card (Stage 2: scale-fade) */}
           <div className={`flex-shrink-0 ${isReady(2) ? 'landing-scale-fade' : 'landing-hidden'}`}>
-            <div className="iridescent-border">
-            <TiltCard className="rounded-[30px] overflow-hidden" intensity={10}>
+            <TiltCard className="rounded-[30px] overflow-hidden border border-[#1a3060]" intensity={10}>
               <div className="relative w-[340px] h-[474px] bg-black">
                 {/* Photo — stops above the bottom bar */}
                 <img
@@ -82,7 +81,6 @@ export function HomeSection({ isReady }: HomeSectionProps) {
                 </div>
               </div>
             </TiltCard>
-            </div>
           </div>
 
           {/* Right Side - Bio Section */}
@@ -90,9 +88,9 @@ export function HomeSection({ isReady }: HomeSectionProps) {
             <div className="space-y-8">
               {/* Animated Text (Stage 3: fade-up) */}
               <div className={`text-3xl lg:text-4xl font-semibold ${isReady(3) ? 'landing-fade-up' : 'landing-hidden'}`}>
-                <span className="text-gray-400">I'm a</span>
+                <span className="text-white">I'm a</span>
                 <span
-                  className={`text-gray-400 ${
+                  className={`text-white ${
                     !showExtraLetter && !isExiting
                       ? 'opacity-0 -translate-y-4 scale-75'
                       : ''
@@ -109,7 +107,7 @@ export function HomeSection({ isReady }: HomeSectionProps) {
                 >
                   {(showExtraLetter || isExiting) ? 'n' : ''}
                 </span>
-                <span className="text-gray-400"> </span>
+                <span className="text-white"> </span>
                 <AnimatedText
                   words={[
                     'builder.',
@@ -122,7 +120,7 @@ export function HomeSection({ isReady }: HomeSectionProps) {
               </div>
 
               {/* Bio Text (Stage 4: fade-up) */}
-              <p className={`text-gray-400 text-lg leading-relaxed ${isReady(4) ? 'landing-fade-up' : 'landing-hidden'}`}>
+              <p className={`text-white text-lg leading-relaxed ${isReady(4) ? 'landing-fade-up' : 'landing-hidden'}`}>
                 Hi I'm Aarya! I'm a student at Northwestern studying Computer Engineering and Math.
                 Currently seeking 2026 internships in software engineering, firmware, and digital design.
               </p>
