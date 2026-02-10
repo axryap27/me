@@ -1,4 +1,4 @@
-import { useState, useEffect, useCallback } from 'react';
+import { useState, useEffect, useCallback, useMemo } from 'react';
 import { Navigation } from '@/components/Navigation';
 import { HomeSection } from '@/components/sections/HomeSection';
 import { ExperienceSection } from '@/components/sections/ExperienceSection';
@@ -45,6 +45,9 @@ const Index = () => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, [handleScroll]);
 
+  const enabledWaves = useMemo<Array<'top' | 'middle' | 'bottom'>>(() => ['top', 'middle', 'bottom'], []);
+  const linesGradient = useMemo(() => ['#0a1628', '#132244', '#1a3060'], []);
+
   return (
     <div className="min-h-screen bg-black text-white relative">
       {/* Floating Lines — fixed behind content, hyperspace on scroll */}
@@ -53,10 +56,10 @@ const Index = () => {
         style={{ opacity: 1 - hyperProgress * 0.7 }}
       >
         <FloatingLines
-          enabledWaves={['top', 'middle', 'bottom']}
+          enabledWaves={enabledWaves}
           lineCount={5}
           lineDistance={5}
-          linesGradient={['#4a90d9', '#6bb5ff', '#99d1ff']}
+          linesGradient={linesGradient}
           bendRadius={5}
           bendStrength={-0.3}
           mouseDamping={0.05}

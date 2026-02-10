@@ -494,22 +494,8 @@ export default function FloatingLines({
         renderer.domElement.parentElement.removeChild(renderer.domElement);
       }
     };
-  }, [
-    linesGradient,
-    enabledWaves,
-    lineCount,
-    lineDistance,
-    topWavePosition,
-    middleWavePosition,
-    bottomWavePosition,
-    animationSpeed,
-    interactive,
-    bendRadius,
-    bendStrength,
-    mouseDamping,
-    parallax,
-    parallaxStrength
-  ]);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   return (
     <div
