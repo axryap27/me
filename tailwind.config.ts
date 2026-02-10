@@ -20,6 +20,8 @@ export default {
 		extend: {
 			fontFamily: {
 				inter: ['Inter', 'sans-serif'],
+				'inter-tight': ['"Inter Tight"', 'sans-serif'],
+				'space-mono': ['"Space Mono"', 'monospace'],
 			},
 			colors: {
 				border: 'hsl(var(--border))',

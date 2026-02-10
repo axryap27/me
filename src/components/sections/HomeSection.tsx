@@ -50,27 +50,18 @@ export function HomeSection({ isReady }: HomeSectionProps) {
 
           {/* Left Side - Profile Card (Stage 2: scale-fade) */}
           <div className={`flex-shrink-0 ${isReady(2) ? 'landing-scale-fade' : 'landing-hidden'}`}>
+            <div className="iridescent-border">
             <TiltCard className="rounded-[30px] overflow-hidden" intensity={10}>
-              <div className="relative w-[340px] h-[474px] bg-black/90">
-                {/* Full background photo */}
+              <div className="relative w-[340px] h-[474px] bg-black">
+                {/* Photo — stops above the bottom bar */}
                 <img
                   src="/images/profile.jpg"
                   alt="Aarya Patel"
-                  className="absolute inset-0 w-full h-full object-cover"
+                  className="absolute inset-0 w-full h-[calc(100%-80px)] object-cover"
                 />
 
-                {/* Name & title overlay at top */}
-                <div className="absolute top-8 left-0 right-0 text-center z-10">
-                  <h3 className="font-['JetBrains_Mono'] font-semibold text-3xl text-white drop-shadow-lg">
-                    Aarya Patel
-                  </h3>
-                  <p className="font-['JetBrains_Mono'] font-semibold text-sm text-white/80 drop-shadow-lg mt-1">
-                    CompE & Math @ Northwestern
-                  </p>
-                </div>
-
                 {/* Bottom bar */}
-                <div className="absolute bottom-5 left-5 right-5 z-10 flex items-center justify-between bg-white/10 backdrop-blur-[30px] border border-white/10 rounded-2xl px-3.5 py-3">
+                <div className="absolute bottom-5 left-5 right-5 z-10 flex items-center justify-between px-3.5 py-3">
                   <div className="flex items-center gap-3">
                     <div className="w-10 h-10 rounded-full overflow-hidden border border-white/10 flex-shrink-0">
                       <img src="/images/profile.jpg" alt="Mini avatar" className="w-full h-full object-cover" />
@@ -91,6 +82,7 @@ export function HomeSection({ isReady }: HomeSectionProps) {
                 </div>
               </div>
             </TiltCard>
+            </div>
           </div>
 
           {/* Right Side - Bio Section */}

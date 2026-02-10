@@ -84,6 +84,9 @@ export function Navigation({ activeSection, onSectionChange, animationReady = tr
               alt="Logo"
               className="h-10 w-10 object-contain"
             />
+            <span className="ml-3 text-sm font-inter-tight font-bold text-white tracking-wide">Aarya Patel</span>
+            <span className="mx-3 h-4 w-px bg-gray-600" />
+            <span className="text-xs font-space-mono text-gray-400">CompE + Math @ Northwestern</span>
           </Link>
 
           <div className="flex items-center space-x-8">

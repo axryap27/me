@@ -2,6 +2,32 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Iridescent rotating border */
+@property --border-angle {
+  syntax: "<angle>";
+  initial-value: 0deg;
+  inherits: false;
+}
+
+@keyframes iridescent-spin {
+  to { --border-angle: 360deg; }
+}
+
+.iridescent-border {
+  --border-angle: 0deg;
+  animation: iridescent-spin 4s linear infinite;
+  border-radius: 30px;
+  padding: 1.5px;
+  background: conic-gradient(
+    from var(--border-angle),
+    rgba(40, 70, 130, 0.7),
+    rgba(80, 40, 120, 0.7),
+    rgba(120, 50, 80, 0.7),
+    rgba(40, 100, 90, 0.7),
+    rgba(40, 70, 130, 0.7)
+  );
+}
+
 /* Custom bounce animation for the "n" letter */
 @keyframes custom-bounce {
   0% {
@@ -45,7 +71,7 @@
 All colors MUST be HSL.
 */
 
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700;800;900&family=Space+Mono:wght@400;700&display=swap');
 
 @layer base {
   :root {
