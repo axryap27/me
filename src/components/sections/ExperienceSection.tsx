@@ -2,19 +2,11 @@ export function ExperienceSection() {
   const experiences = [
     {
       title: "Research Assistant",
-      company: "Northwestern Computer Science Department",
+      company: "MAGICS Lab - Northwestern University",
       period: "Feb 2026 - Present",
-      description: "Adaptive/dual process reasoning in diffusion models",
+      description: "Researching JEPA with a Ph.D. Student",
       technologies: [],
       logo: "/images/cs_research.png",
-    },
-    {
-      title: "Digital Design Engineer",
-      company: "IEEE Northwestern Branch",
-      period: "Jan 2026 - Present",
-      description: "AXI-DMA Engine in SystemVerilog.",
-      technologies: ["SystemVerilog", "AXI4-Lite", "Shell"],
-      logo: "/images/northwestern_university_ieee_student_branch_logo.jpeg",
     },
     {
       title: "Software Engineer Intern",
