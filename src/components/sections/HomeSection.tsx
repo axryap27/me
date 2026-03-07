@@ -122,7 +122,7 @@ export function HomeSection({ isReady }: HomeSectionProps) {
               {/* Bio Text (Stage 4: fade-up) */}
               <p className={`text-white text-lg leading-relaxed ${isReady(4) ? 'landing-fade-up' : 'landing-hidden'}`}>
                 Hi I'm Aarya! I'm a student at Northwestern studying Computer Engineering and Math,
-                exploring roles in software engineering, firmware, and digital design.
+                exploring roles in tech.
               </p>
 
               {/* Buttons (Stage 5: fade-up) */}
