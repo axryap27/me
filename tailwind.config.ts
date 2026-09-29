@@ -22,8 +22,20 @@ export default {
 				inter: ['Inter', 'sans-serif'],
 				'inter-tight': ['"Inter Tight"', 'sans-serif'],
 				'space-mono': ['"Space Mono"', 'monospace'],
+				'serif-display': ['"Instrument Serif"', 'serif'],
 			},
 			colors: {
+				// Dark woods / Pacific Northwest accents
+				moss: {
+					deep: '#3f4a24',
+					DEFAULT: '#6b7a3a',
+					light: '#a4b27a',
+				},
+				pacific: {
+					deep: '#2b4454',
+					DEFAULT: '#4f7489',
+					light: '#9dbacb',
+				},
 				border: 'hsl(var(--border))',
 				input: 'hsl(var(--input))',
 				ring: 'hsl(var(--ring))',

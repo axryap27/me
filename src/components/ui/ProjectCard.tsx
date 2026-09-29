@@ -1,154 +1,153 @@
-import { useState } from 'react';
-import { TiltCard } from '@/components/ui/TiltCard';
-import { ImageStack } from '@/components/ui/ImageStack';
-import { Button } from '@/components/ui/button';
-import { Github, ExternalLink, Maximize2, Minimize2 } from 'lucide-react';
+import { useRef } from 'react';
+import { motion } from 'motion/react';
+import { ArrowUpRight, Github } from 'lucide-react';
+import { EASE_OUT } from '@/components/motion/primitives';
+import { statusLabel, type Project } from '@/data/projects';
+import { cn } from '@/lib/utils';
 
-interface ProjectCardProps {
-  title: string;
-  description: string;
-  tech: string[];
-  category: string;
-  year: string;
-  githubUrl: string;
-  externalUrl?: string;
-  images?: string[];
-  size?: 'phone' | 'square';
-  layout?: 'horizontal' | 'vertical';
+const statusDot: Record<Project['status'], string> = {
+  building: 'bg-pacific-light',
+  shipped: 'bg-moss-light',
+  paused: 'bg-gray-500',
+};
+
+export const primaryLink = (p: Project) => p.live ?? p.github;
+
+export function StatusBadge({ status }: { status: Project['status'] }) {
+  return (
+    <span className="inline-flex items-center gap-1.5">
+      <span className={cn('h-1.5 w-1.5 rounded-full', statusDot[status])} />
+      {statusLabel[status]}
+    </span>
+  );
 }
 
-export function ProjectCard({
-  title,
-  description,
-  tech,
-  category,
-  year,
-  githubUrl,
-  externalUrl,
-  images,
-  size = 'square',
-  layout = 'horizontal'
-}: ProjectCardProps) {
-  const [isExpanded, setIsExpanded] = useState(false);
+/** Tracks the cursor in CSS vars so `.spotlight` can paint a glow that follows it. */
+export function useSpotlight<T extends HTMLElement>() {
+  const ref = useRef<T>(null);
+  const onPointerMove = (e: React.PointerEvent) => {
+    const el = ref.current;
+    if (!el) return;
+    const r = el.getBoundingClientRect();
+    el.style.setProperty('--mx', `${e.clientX - r.left}px`);
+    el.style.setProperty('--my', `${e.clientY - r.top}px`);
+  };
+  return { ref, onPointerMove };
+}
 
-  const cardDimensions = size === 'phone'
-    ? isExpanded
-      ? "w-[280px] h-[580px]"
-      : "w-[160px] h-[320px]"
-    : "w-[300px] h-[300px]";
+export function ProjectMedia({ project, className }: { project: Project; className?: string }) {
+  const { images, phone, title } = project;
 
-  const isVerticalLayout = layout === 'vertical';
+  if (images.length === 0) {
+    return (
+      <div className={cn('project-placeholder flex h-full w-full items-center justify-center', className)}>
+        <span className="px-6 text-center font-space-mono text-[11px] uppercase leading-relaxed tracking-[0.25em] text-white/40 transition-colors duration-500 group-hover:text-white/70">
+          {title}
+        </span>
+      </div>
+    );
+  }
+
+  if (phone) {
+    const shown = images.slice(0, 3);
+    const mid = (shown.length - 1) / 2;
+    return (
+      <div className={cn('flex h-full w-full items-end justify-center bg-gradient-to-b from-[#0b1426] to-black pt-6', className)}>
+        {shown.map((src, i) => {
+          const offset = i - mid;
+          return (
+            <motion.img
+              key={src}
+              src={src}
+              alt={`${title} screenshot ${i + 1}`}
+              loading="lazy"
+              className="-mb-10 w-[30%] rounded-xl border border-white/10 shadow-2xl"
+              style={{ zIndex: 10 - Math.abs(offset) }}
+              variants={{
+                rest: { x: `${offset * -30}%`, rotate: offset * 6, y: Math.abs(offset) * 14 },
+                hover: { x: `${offset * 8}%`, rotate: offset * 3, y: Math.abs(offset) * 4 - 10 },
+              }}
+              transition={{ duration: 0.7, ease: EASE_OUT }}
+            />
+          );
+        })}
+      </div>
+    );
+  }
 
   return (
-    <div className={`flex ${isVerticalLayout ? 'flex-col' : 'flex-col lg:flex-row'} items-center gap-4 ${isVerticalLayout ? '' : 'lg:gap-8'}`}>
-      {/* Project Card Image */}
-      <div className="flex-shrink-0">
-        <TiltCard
-          className={`${cardDimensions} transition-all duration-500 ease-in-out`}
-          intensity={8}
-          scale={1.02}
-        >
-          <div className="relative w-full h-full bg-gradient-to-br from-gray-900 to-gray-800 rounded-2xl border border-gray-700">
-            {/* Project Image */}
-            <div className="absolute inset-2 rounded-xl">
-              {images && images.length > 0 ? (
-                <ImageStack
-                  images={images}
-                  alt={title}
-                  objectPosition={size === 'phone' && !isExpanded ? '5% center' : 'center'}
-                />
-              ) : (
-                <div className="bg-gradient-to-br from-blue-600/20 to-purple-600/20 w-full h-full flex items-center justify-center overflow-hidden rounded-xl">
-                  <div className="text-6xl text-white/50">
-                    📱
-                  </div>
-                </div>
-              )}
-            </div>
+    <motion.img
+      src={images[0]}
+      alt={title}
+      loading="lazy"
+      className={cn('h-full w-full object-cover', className)}
+      style={{ objectPosition: project.imagePosition }}
+      variants={{ rest: { scale: 1 }, hover: { scale: 1.05 } }}
+      transition={{ duration: 0.9, ease: EASE_OUT }}
+    />
+  );
+}
 
-            {/* Overlay */}
-            <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
+export function ProjectCard({ project, className }: { project: Project; className?: string }) {
+  const { ref, onPointerMove } = useSpotlight<HTMLElement>();
+  const href = primaryLink(project);
 
-            {/* Expand/Collapse button for phone cards */}
-            {size === 'phone' && (
-              <div className="absolute top-4 right-4 z-10">
-                <Button
-                  size="sm"
-                  variant="ghost"
-                  className="p-2 h-8 w-8 bg-black/30 hover:bg-white/20 border border-white/20"
-                  onClick={(e) => {
-                    e.stopPropagation();
-                    setIsExpanded(!isExpanded);
-                  }}
-                >
-                  {isExpanded ? (
-                    <Minimize2 className="h-4 w-4 text-white" />
-                  ) : (
-                    <Maximize2 className="h-4 w-4 text-white" />
-                  )}
-                </Button>
-              </div>
-            )}
-
-            {/* Project info on card */}
-            <div className="absolute bottom-4 left-4 right-4 z-10">
-              <div className="flex gap-2">
-                {githubUrl && githubUrl !== '#' && (
-                  <Button
-                    size="sm"
-                    variant="ghost"
-                    className="p-2 h-8 w-8 bg-black/30 hover:bg-white/20 border border-white/20"
-                    onClick={(e) => {
-                      e.stopPropagation();
-                      window.open(githubUrl, '_blank');
-                    }}
-                  >
-                    <Github className="h-4 w-4 text-white" />
-                  </Button>
-                )}
-                {externalUrl && (
-                  <Button
-                    size="sm"
-                    variant="ghost"
-                    className="p-2 h-8 w-8 bg-black/30 hover:bg-white/20 border border-white/20"
-                    onClick={(e) => {
-                      e.stopPropagation();
-                      window.open(externalUrl, '_blank');
-                    }}
-                  >
-                    <ExternalLink className="h-4 w-4 text-white" />
-                  </Button>
-                )}
-              </div>
-            </div>
-          </div>
-        </TiltCard>
+  return (
+    <motion.article
+      ref={ref}
+      onPointerMove={onPointerMove}
+      initial="rest"
+      whileHover="hover"
+      animate="rest"
+      className={cn(
+        'spotlight group relative flex flex-col overflow-hidden rounded-2xl border border-white/10 bg-white/[0.02] transition-colors duration-500 hover:border-white/20',
+        className,
+      )}
+    >
+      <div className="relative aspect-[16/9] overflow-hidden border-b border-white/5">
+        <ProjectMedia project={project} />
       </div>
 
-      {/* Project Details */}
-      <div className="flex-1 max-w-[300px]">
-        <div className="space-y-2">
-          <div>
-            <div className="text-xs text-gray-500 mb-0.5">{year}</div>
-            <h3 className="text-base font-bold mb-0.5 text-white">{title}</h3>
-            <div className="text-xs text-gray-400 mb-1">{category}</div>
-            <p className="text-gray-400 text-sm leading-snug line-clamp-3">
-              {description}
-            </p>
-          </div>
+      <div className="relative flex flex-1 flex-col p-5">
+        <div className="mb-2 flex items-center justify-between font-space-mono text-[11px] text-gray-500">
+          <StatusBadge status={project.status} />
+          <span>{project.period}</span>
+        </div>
 
+        <h3 className="font-inter-tight text-lg font-semibold tracking-tight text-white">
+          {href ? (
+            <a href={href} target="_blank" rel="noopener noreferrer" className="after:absolute after:inset-0 focus:outline-none">
+              {project.title}
+            </a>
+          ) : (
+            project.title
+          )}
+          <ArrowUpRight className="ml-1 inline h-4 w-4 -translate-x-1 translate-y-0.5 text-gray-500 opacity-0 transition-all duration-300 group-hover:translate-x-0 group-hover:translate-y-0 group-hover:text-white group-hover:opacity-100" />
+        </h3>
+        <div className="mt-0.5 text-xs text-gray-500">{project.category}</div>
+        <p className="mt-2 text-sm leading-snug text-gray-400">{project.summary}</p>
+
+        <div className="mt-auto flex items-end justify-between gap-3 pt-3">
           <div className="flex flex-wrap gap-1.5">
-            {tech.map((techItem, techIndex) => (
-              <span
-                key={techIndex}
-                className="px-2 py-0.5 text-xs bg-gray-800 text-gray-300 rounded-full border border-gray-700"
-              >
-                {techItem}
+            {project.stack.map((t) => (
+              <span key={t} className="chip">
+                {t}
               </span>
             ))}
           </div>
+          {project.github && project.live && (
+            <a
+              href={project.github}
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label={`${project.title} on GitHub`}
+              className="relative z-10 flex-shrink-0 rounded-full border border-white/10 p-1.5 text-gray-400 transition-colors hover:border-white/40 hover:text-white"
+            >
+              <Github className="h-3.5 w-3.5" />
+            </a>
+          )}
         </div>
       </div>
-    </div>
+    </motion.article>
   );
 }

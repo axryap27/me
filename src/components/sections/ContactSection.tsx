@@ -1,54 +1,81 @@
-import { Button } from '@/components/ui/button';
-import { Mail, Github, Linkedin, ExternalLink } from 'lucide-react';
+import { ArrowUpRight, Check, Copy, Github, Linkedin } from 'lucide-react';
+import { useState } from 'react';
+import { AnimatePresence, motion } from 'motion/react';
+import { Magnetic, Reveal, SplitText } from '@/components/motion/primitives';
+import { site } from '@/data/site';
 
 export function ContactSection() {
+  const [copied, setCopied] = useState(false);
+
+  const copy = async () => {
+    try {
+      await navigator.clipboard.writeText(site.email);
+      setCopied(true);
+      setTimeout(() => setCopied(false), 1800);
+    } catch {
+      window.location.href = `mailto:${site.email}`;
+    }
+  };
+
   return (
-    <section id="contact" className="py-24 bg-black text-white">
-      <div className="container mx-auto px-8">
-        <div className="max-w-4xl mx-auto text-center">
-          
-          {/* Header */}
-          <div className="mb-16">
-            <h2 className="text-4xl lg:text-6xl font-bold mb-6">
-              LET'S CONNECT
-            </h2>
-            <p className="text-xl text-gray-400 max-w-2xl mx-auto leading-relaxed">
-              Always interested in new opportunities and collaborations. 
-              Feel free to reach out, always willing to chat!
+    <section id="contact" className="relative py-32 md:py-44">
+      <div className="container mx-auto px-6">
+        <div className="mx-auto max-w-4xl text-center">
+          <Reveal blur={false} y={12}>
+            <div className="mb-6 font-space-mono text-xs uppercase tracking-[0.2em] text-gray-500">Contact</div>
+          </Reveal>
+          <h2 className="font-inter-tight text-5xl font-semibold leading-[1.05] tracking-tight text-white md:text-7xl">
+            <SplitText text="Get in touch." />
+          </h2>
+          <Reveal delay={0.3}>
+            <p className="mx-auto mt-8 max-w-xl text-lg leading-relaxed text-gray-400">
+              Open to new opportunities, research, and collaborations. Email is the best way to reach me, and I'm always happy to chat.
             </p>
-          </div>
+          </Reveal>
 
-          {/* Contact Method */}
-          <div className="max-w-md mx-auto mb-16">
-            <div className="p-8 bg-gray-900/50 rounded-2xl border border-gray-800 hover:border-gray-700 transition-colors">
-              <div className="flex justify-center gap-4 mb-4">
-                <Mail className="h-8 w-8 text-white" />
-                <Linkedin className="h-8 w-8 text-white" />
-              </div>
-              <h3 className="text-xl font-bold mb-2 text-center">Get In Touch</h3>
-              <p className="text-gray-400 mb-6 text-center">Reach out via email or connect on LinkedIn</p>
-              
-              <div className="flex gap-3">
-                <a href="mailto:aarya27@gmail.com" className="flex-1">
-                  <Button 
-                    className="w-full bg-white text-black hover:bg-gray-200"
-                  >
-                    <Mail className="h-4 w-4 mr-2" />
-                    Email
-                  </Button>
+          <Reveal delay={0.4} className="mt-12 flex flex-col items-center justify-center gap-4 sm:flex-row">
+            <div className="flex items-center rounded-full bg-[#ecefe6] p-1 pl-6 text-[#0b0f0c]">
+                <a href={`mailto:${site.email}`} className="group flex items-center gap-2 pr-4 text-sm font-medium">
+                  {site.email}
+                  <ArrowUpRight className="h-4 w-4 transition-transform duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
                 </a>
-                <Button 
-                  variant="outline"
-                  className="flex-1 border-gray-600 text-white hover:bg-white hover:text-black"
-                  onClick={() => window.open('https://linkedin.com/in/aarya-p9')}
+                <button
+                  onClick={copy}
+                  aria-label="Copy email address"
+                  className="relative flex h-10 w-10 items-center justify-center rounded-full bg-black/5 transition-colors hover:bg-black/10"
                 >
-                  <Linkedin className="h-4 w-4 mr-2" />
-                  LinkedIn
-                </Button>
-              </div>
+                  <AnimatePresence mode="wait" initial={false}>
+                    <motion.span
+                      key={copied ? 'check' : 'copy'}
+                      initial={{ scale: 0.5, opacity: 0 }}
+                      animate={{ scale: 1, opacity: 1 }}
+                      exit={{ scale: 0.5, opacity: 0 }}
+                      transition={{ duration: 0.2 }}
+                    >
+                      {copied ? <Check className="h-4 w-4 text-moss-deep" /> : <Copy className="h-4 w-4" />}
+                    </motion.span>
+                  </AnimatePresence>
+                </button>
             </div>
-          </div>
-
+            <div className="flex gap-3">
+              {[
+                { href: site.linkedin, icon: Linkedin, label: 'LinkedIn' },
+                { href: site.github, icon: Github, label: 'GitHub' },
+              ].map(({ href, icon: Icon, label }) => (
+                <Magnetic key={label}>
+                  <a
+                    href={href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-2 rounded-full border border-white/15 px-5 py-3.5 text-sm text-white transition-colors hover:border-white/40 hover:bg-white/5"
+                  >
+                    <Icon className="h-4 w-4" />
+                    {label}
+                  </a>
+                </Magnetic>
+              ))}
+            </div>
+          </Reveal>
         </div>
       </div>
     </section>

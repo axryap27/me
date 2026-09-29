@@ -1,167 +1,154 @@
-import { useState } from 'react';
+import { useRef } from 'react';
+import { motion, useScroll, useTransform } from 'motion/react';
+import { ArrowDown, ArrowUpRight, Github, Linkedin } from 'lucide-react';
+import { EASE_OUT, Magnetic, SplitText } from '@/components/motion/primitives';
 import { TiltCard } from '@/components/ui/TiltCard';
-import { AnimatedText } from '@/components/ui/AnimatedText';
-import { Button } from '@/components/ui/button';
-import { ExternalLink, ArrowDown, Github, Linkedin, Mail } from 'lucide-react';
+import { experience } from '@/data/experience';
+import { site } from '@/data/site';
 
-interface HomeSectionProps {
-  isReady: (stage: number) => boolean;
-}
+const enter = (delay: number) => ({
+  initial: { opacity: 0, y: 20, filter: 'blur(6px)' },
+  animate: { opacity: 1, y: 0, filter: 'blur(0px)' },
+  transition: { duration: 1, delay, ease: EASE_OUT },
+});
 
-export function HomeSection({ isReady }: HomeSectionProps) {
-  const [currentWord, setCurrentWord] = useState('builder.');
-  const [showExtraLetter, setShowExtraLetter] = useState(false);
-  const [isExiting, setIsExiting] = useState(false);
+const current = experience.find((e) => e.end === 'Present');
+const previous = experience.find((e) => e.end !== 'Present');
 
-  const handleWordChange = (word: string) => {
-    setCurrentWord(word);
-    const vowelWords = ['engineer.', 'innovator.'];
-    const needsAn = vowelWords.includes(word.toLowerCase());
+export function HomeSection() {
+  const ref = useRef<HTMLElement>(null);
+  const { scrollYProgress } = useScroll({ target: ref, offset: ['start start', 'end start'] });
+  const contentY = useTransform(scrollYProgress, [0, 1], [0, -100]);
+  const photoY = useTransform(scrollYProgress, [0, 1], [0, -50]);
+  const fade = useTransform(scrollYProgress, [0, 0.6], [1, 0]);
 
-    if (showExtraLetter && !needsAn) {
-      setIsExiting(true);
-      setTimeout(() => {
-        setShowExtraLetter(false);
-        setIsExiting(false);
-      }, 300);
-    } else if (needsAn) {
-      setShowExtraLetter(false);
-      setIsExiting(false);
-      setTimeout(() => {
-        setShowExtraLetter(true);
-      }, 1000);
-    } else {
-      setShowExtraLetter(false);
-      setIsExiting(false);
-    }
-  };
-
-  const scrollToNext = () => {
-    const experienceSection = document.getElementById('experience');
-    if (experienceSection) {
-      experienceSection.scrollIntoView({ behavior: 'smooth' });
-    }
-  };
+  const scrollToNext = () => document.getElementById('experience')?.scrollIntoView({ behavior: 'smooth' });
 
   return (
-    <section id="home" className="relative min-h-screen flex items-center justify-center overflow-hidden">
-      <div className="flex items-center justify-center px-8 py-20 max-w-6xl mx-auto">
-        <div className="flex flex-col lg:flex-row gap-12 items-center">
-
-          {/* Left Side - Profile Card (Stage 2: scale-fade) */}
-          <div className={`flex-shrink-0 ${isReady(2) ? 'landing-scale-fade' : 'landing-hidden'}`}>
-            <TiltCard className="rounded-[30px] overflow-hidden border border-[#1a3060]" intensity={10}>
-              <div className="relative w-[340px] h-[474px] bg-black">
-                {/* Photo — stops above the bottom bar */}
-                <img
-                  src="/images/profile.jpg"
-                  alt="Aarya Patel"
-                  className="absolute inset-0 w-full h-[calc(100%-80px)] object-cover"
-                />
-
-                {/* Bottom bar */}
-                <div className="absolute bottom-5 left-5 right-5 z-10 flex items-center justify-between px-3.5 py-3">
-                  <div className="flex items-center gap-3">
-                    <div className="w-10 h-10 rounded-full overflow-hidden border border-white/10 flex-shrink-0">
-                      <img src="/images/profile.jpg" alt="Mini avatar" className="w-full h-full object-cover" />
-                    </div>
-                    <span className="text-sm font-medium text-white/90">@axryap27</span>
-                  </div>
-                  <div className="flex items-center gap-2">
-                    <a href="https://github.com/axryap27" target="_blank" rel="noopener noreferrer" className="p-2 rounded-lg border border-white/10 text-white/80 hover:text-white hover:border-white/40 transition-all">
-                      <Github className="w-4 h-4" />
-                    </a>
-                    <a href="https://linkedin.com/in/aarya-p9" target="_blank" rel="noopener noreferrer" className="p-2 rounded-lg border border-white/10 text-white/80 hover:text-white hover:border-white/40 transition-all">
-                      <Linkedin className="w-4 h-4" />
-                    </a>
-                    <a href="mailto:aarya27@gmail.com" className="p-2 rounded-lg border border-white/10 text-white/80 hover:text-white hover:border-white/40 transition-all">
-                      <Mail className="w-4 h-4" />
-                    </a>
-                  </div>
+    <section ref={ref} id="home" className="relative flex min-h-[100svh] items-center justify-center overflow-hidden">
+      <motion.div style={{ opacity: fade }} className="mx-auto w-full max-w-6xl px-6 pb-20 pt-32">
+        <div className="flex flex-col items-center gap-12 lg:flex-row lg:items-center lg:gap-20">
+          {/* Photo */}
+          <motion.div style={{ y: photoY }} className="flex-shrink-0">
+            <motion.div
+              initial={{ clipPath: 'inset(100% 0% 0% 0% round 22px)', scale: 1.06 }}
+              animate={{ clipPath: 'inset(0% 0% 0% 0% round 22px)', scale: 1 }}
+              transition={{ duration: 1.4, delay: 0.2, ease: EASE_OUT }}
+            >
+              <TiltCard
+                intensity={10}
+                className="group overflow-hidden rounded-[22px] border border-white/10"
+              >
+                <div className="relative h-[380px] w-[290px] sm:h-[440px] sm:w-[340px]">
+                  <img src="/images/profile.jpg" alt={site.name} className="h-full w-full object-cover" />
+                  {/* Green edge accent, hover only */}
+                  <div className="pointer-events-none absolute inset-0 rounded-[22px] border border-moss/80 opacity-0 shadow-[inset_0_0_18px_rgba(107,122,58,0.35)] transition-opacity duration-500 group-hover:opacity-100" />
                 </div>
-              </div>
-            </TiltCard>
-          </div>
+              </TiltCard>
+            </motion.div>
+          </motion.div>
 
-          {/* Right Side - Bio Section */}
-          <div className="flex-1 max-w-xl">
-            <div className="space-y-8">
-              {/* Animated Text (Stage 3: fade-up) */}
-              <div className={`text-3xl lg:text-4xl font-semibold ${isReady(3) ? 'landing-fade-up' : 'landing-hidden'}`}>
-                <span className="text-white">I'm a</span>
-                <span
-                  className={`text-white ${
-                    !showExtraLetter && !isExiting
-                      ? 'opacity-0 -translate-y-4 scale-75'
-                      : ''
-                  }`}
-                  style={{
-                    display: 'inline-block',
-                    transformOrigin: 'center bottom',
-                    animation: isExiting
-                      ? 'custom-exit 0.4s ease-in forwards'
-                      : showExtraLetter
-                      ? 'custom-bounce 1.2s ease-out'
-                      : 'none'
-                  }}
+          {/* Intro */}
+          <motion.div style={{ y: contentY }} className="w-full max-w-xl flex-1">
+            <motion.div
+              {...enter(0.5)}
+              className="mb-6 font-space-mono text-[11px] uppercase tracking-[0.2em] text-gray-400"
+            >
+              Computer Engineering &amp; Math · Northwestern
+            </motion.div>
+
+            <h1 className="mb-6 font-inter-tight text-5xl font-semibold tracking-tight text-white sm:text-6xl">
+              <SplitText text={site.name} animateOnMount delay={0.55} stagger={0.08} />
+            </h1>
+
+            <motion.p {...enter(0.8)} className="mb-10 text-lg leading-relaxed text-gray-300">
+              I'm a student at Northwestern studying Computer Engineering and Math, working across digital design, ML
+              systems, and backend infrastructure.
+            </motion.p>
+
+            <motion.dl
+              {...enter(0.95)}
+              className="mb-10 grid grid-cols-[88px_1fr] gap-y-3 border-t border-white/10 pt-6 text-sm"
+            >
+              {current && (
+                <>
+                  <dt className="flex items-center gap-2 font-space-mono text-[11px] uppercase tracking-[0.15em] text-gray-500">
+                    <span className="h-1.5 w-1.5 rounded-full bg-moss-light" />
+                    Now
+                  </dt>
+                  <dd className="text-gray-200">
+                    {current.role} <span className="text-gray-500">·</span>{' '}
+                    <span className="text-gray-400">{current.org}</span>
+                  </dd>
+                </>
+              )}
+              {previous && (
+                <>
+                  <dt className="pl-3.5 font-space-mono text-[11px] uppercase tracking-[0.15em] text-gray-500">Prev</dt>
+                  <dd className="text-gray-200">
+                    {previous.role} <span className="text-gray-500">·</span>{' '}
+                    <span className="text-gray-400">{previous.org}</span>
+                  </dd>
+                </>
+              )}
+            </motion.dl>
+
+            <motion.div {...enter(1.1)} className="flex flex-wrap items-center gap-3">
+              <Magnetic strength={0.15}>
+                <a
+                  href={`mailto:${site.email}`}
+                  className="group inline-flex items-center gap-2 rounded-full bg-[#ecefe6] px-6 py-3 text-sm font-medium text-[#0b0f0c] transition-colors hover:bg-white"
                 >
-                  {(showExtraLetter || isExiting) ? 'n' : ''}
-                </span>
-                <span className="text-white"> </span>
-                <AnimatedText
-                  words={[
-                    'builder.',
-                    'coder.',
-                    'engineer.',
-                  ]}
-                  className="font-semibold"
-                  onWordChange={handleWordChange}
-                />
-              </div>
-
-              {/* Bio Text (Stage 4: fade-up) */}
-              <p className={`text-white text-lg leading-relaxed ${isReady(4) ? 'landing-fade-up' : 'landing-hidden'}`}>
-                Hi I'm Aarya! I'm a student at Northwestern studying Computer Engineering and Math,
-                exploring roles in tech.
-              </p>
-
-              {/* Buttons (Stage 5: fade-up) */}
-              <div className={`flex flex-col sm:flex-row gap-4 ${isReady(5) ? 'landing-fade-up' : 'landing-hidden'}`}>
-                <a href="mailto:aarya27@gmail.com" className="inline-block">
-                  <Button
-                    size="lg"
-                    className="bg-white text-black hover:bg-gray-200 font-medium px-8 py-4"
-                  >
-                    Get In Touch
-                    <ExternalLink className="ml-2 h-4 w-4" />
-                  </Button>
+                  Get in touch
+                  <ArrowUpRight className="h-4 w-4 transition-transform duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
                 </a>
-
-                <Button
-                  variant="outline"
-                  size="lg"
-                  className="border-gray-600 text-white hover:bg-white hover:text-black font-medium px-8 py-4"
+              </Magnetic>
+              <Magnetic strength={0.15}>
+                <button
                   onClick={scrollToNext}
+                  className="group inline-flex items-center gap-2 rounded-full border border-white/15 px-6 py-3 text-sm font-medium text-white transition-colors hover:border-white/35 hover:bg-white/5"
                 >
-                  View Work
-                  <ArrowDown className="ml-2 h-4 w-4" />
-                </Button>
-              </div>
-            </div>
-          </div>
+                  View work
+                  <ArrowDown className="h-4 w-4 transition-transform duration-300 group-hover:translate-y-0.5" />
+                </button>
+              </Magnetic>
+              <span className="mx-1 hidden h-5 w-px bg-white/10 sm:block" />
+              {[
+                { href: site.github, icon: Github, label: 'GitHub' },
+                { href: site.linkedin, icon: Linkedin, label: 'LinkedIn' },
+              ].map(({ href, icon: Icon, label }) => (
+                <a
+                  key={label}
+                  href={href}
+                  aria-label={label}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="rounded-full p-2.5 text-gray-400 transition-colors hover:bg-white/5 hover:text-white"
+                >
+                  <Icon className="h-[18px] w-[18px]" />
+                </a>
+              ))}
+            </motion.div>
+          </motion.div>
         </div>
-      </div>
+      </motion.div>
 
-      {/* Scroll indicator (Stage 7: fade-up) */}
-      <div className={`absolute bottom-8 left-1/2 transform -translate-x-1/2 ${isReady(7) ? 'landing-fade-up' : 'landing-hidden'}`}>
-        <Button
-          variant="ghost"
+      {/* Scroll cue */}
+      <motion.div style={{ opacity: fade }} className="absolute bottom-8 left-1/2 -translate-x-1/2">
+        <motion.button
           onClick={scrollToNext}
-          className="animate-bounce text-gray-500 hover:text-white transition-colors"
+          aria-label="Scroll to experience"
+          className="flex flex-col items-center gap-3 font-space-mono text-[10px] uppercase tracking-[0.3em] text-gray-500 transition-colors hover:text-white"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 1.6, duration: 1 }}
         >
-          <ArrowDown className="h-5 w-5" />
-        </Button>
-      </div>
+          Scroll
+          <span className="relative h-10 w-px overflow-hidden bg-white/10">
+            <span className="scroll-cue absolute left-0 top-0 h-4 w-px bg-white/70" />
+          </span>
+        </motion.button>
+      </motion.div>
     </section>
   );
 }
