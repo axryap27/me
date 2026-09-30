@@ -26,7 +26,6 @@ export default function Projects() {
           index="02"
           eyebrow="Projects"
           title="Things I've built"
-          description="Hardware, embedded ML, and software — some shipped, some still on the bench."
           animateOnMount
         />
 
