@@ -124,7 +124,7 @@ export function ProjectCard({ project, className }: { project: Project; classNam
           )}
           <ArrowUpRight className="ml-1 inline h-4 w-4 -translate-x-1 translate-y-0.5 text-gray-500 opacity-0 transition-all duration-300 group-hover:translate-x-0 group-hover:translate-y-0 group-hover:text-white group-hover:opacity-100" />
         </h3>
-        <div className="mt-0.5 text-xs text-gray-500">{project.category}</div>
+        {project.category && <div className="mt-0.5 text-xs text-gray-500">{project.category}</div>}
         <p className="mt-2 text-sm leading-snug text-gray-400">{project.summary}</p>
 
         <div className="mt-auto flex items-end justify-between gap-3 pt-3">

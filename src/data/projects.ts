@@ -22,6 +22,17 @@ export interface Project {
 
 export const projects: Project[] = [
   {
+    title: 'Catan Engine',
+    summary: 'Settlers of Catan engine that finds and plays the best possible move.',
+    area: 'Software',
+    category: '',
+    period: '2026',
+    status: 'building',
+    stack: ['C++', 'Python', 'Reinforcement Learning'],
+    github: 'https://github.com/axryap27/catan-engine',
+    images: [],
+  },
+  {
     title: 'Verified RTL Synthesis Pipeline',
     summary: 'Claude agents that turn natural-language specs into formally verified Verilog via stepwise refinement.',
     area: 'ML',
